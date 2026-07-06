@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CCR-MPC Claim Ledger Row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_id",
+    "paper_location",
+    "claim_text",
+    "claim_type",
+    "evidence_artifacts",
+    "tested_scope",
+    "comparison_class",
+    "compute_budget",
+    "limitations",
+    "strongest_alternative_explanation",
+    "status"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^C[0-9]{3}$"
+    },
+    "paper_location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "method",
+        "experiment",
+        "calibration",
+        "efficiency",
+        "limitation",
+        "related_work"
+      ]
+    },
+    "evidence_artifacts": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tested_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comparison_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compute_budget": {
+      "type": "string",
+      "minLength": 1
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1
+    },
+    "strongest_alternative_explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "narrow_wording_needed",
+        "needs_experiment",
+        "drop"
+      ]
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CCR-MPC Experiment Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "domain",
+    "method",
+    "seed",
+    "task",
+    "ood_shift",
+    "planner",
+    "dynamics_model",
+    "metrics",
+    "artifacts"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "synthetic_separation",
+        "classic_control",
+        "dynamic_bicycle_car",
+        "planar_quadrotor",
+        "quasistatic_pushing",
+        "secondary_planner"
+      ]
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "vanilla_mppi",
+        "robust_mpc",
+        "ensemble_uncertainty_penalty",
+        "prediction_calibrated_penalty",
+        "cvar_ra_mppi",
+        "chance_constrained_mpc",
+        "conformal_prediction_mpc",
+        "conformal_risk_non_ccr",
+        "conformal_decision_baseline",
+        "soda_like_fallback",
+        "domain_randomized_mpc",
+        "sysid_mpc",
+        "oracle_mpc",
+        "ccr_no_calibration",
+        "calibration_no_ccr",
+        "disagreement_only",
+        "regret_only",
+        "violation_tail_only",
+        "ccr_mpc"
+      ]
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ood_shift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "level"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "level": {
+          "type": "string",
+          "pattern": "^L[0-9]+$"
+        },
+        "severity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "parameters": {
+          "type": "object"
+        }
+      }
+    },
+    "planner": {
+      "type": "string",
+      "enum": [
+        "MPPI",
+        "CEM-MPC",
+        "shooting-MPC"
+      ]
+    },
+    "dynamics_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "reward",
+        "cost",
+        "violation_rate",
+        "observed_risk",
+        "target_risk",
+        "ece",
+        "brier",
+        "log_loss",
+        "freezing_rate",
+        "compute_ms",
+        "oracle_regret"
+      ],
+      "properties": {
+        "reward": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "number"
+        },
+        "violation_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "observed_risk": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "target_risk": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ece": {
+          "type": "number",
+          "minimum": 0
+        },
+        "brier": {
+          "type": "number",
+          "minimum": 0
+        },
+        "log_loss": {
+          "type": "number",
+          "minimum": 0
+        },
+        "freezing_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "compute_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "oracle_regret": {
+          "type": "number"
+        },
+        "fallback_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "decision_disagreement": {
+          "type": "number",
+          "minimum": 0
+        },
+        "empirical_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "config_path",
+        "log_path",
+        "plot_paths",
+        "model_hash",
+        "code_hash"
+      ],
+      "properties": {
+        "config_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "log_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "plot_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "model_hash": {
+          "type": "string",
+          "minLength": 8
+        },
+        "code_hash": {
+          "type": "string",
+          "minLength": 8
+        }
+      }
+    }
+  }
+}

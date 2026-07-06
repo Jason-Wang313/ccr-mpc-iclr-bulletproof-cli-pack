@@ -1,0 +1,85 @@
+paper: 'Prediction Uncertainty Is Not Control Risk: Counterfactual Risk Calibration
+  for Learned-Dynamics MPC'
+completion_message: 'ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms,
+  calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript,
+  related-work audit, and reviewer-defense reports are finished. All claims are backed
+  by generated artifacts. Human review is required before submission.'
+phases:
+- id: P0
+  name: repository_scaffold_and_logging_schema
+- id: P1
+  name: theory_statements_and_synthetic_construction
+- id: P2
+  name: dynamics_models_and_particles
+- id: P3
+  name: MPC_MPPI_CEM_planners
+- id: P4
+  name: CCR_score_and_calibration
+- id: P5
+  name: baselines
+- id: P6
+  name: domains_D0_D4
+- id: P7
+  name: main_experiments
+- id: P8
+  name: ablation_and_sensitivity
+- id: P9
+  name: plots_tables_statistics
+- id: P10
+  name: paper_skeleton_and_related_work
+- id: P11
+  name: reviewer_attack_closure_report
+- id: P12
+  name: completion_manifest
+domains:
+- synthetic_separation
+- classic_control
+- dynamic_bicycle_car
+- planar_quadrotor
+- quasistatic_pushing
+- secondary_planner
+ood_shifts:
+- friction
+- payload_mass
+- latency
+- actuator_gain
+- sensor_noise
+- steering_bias
+- wind
+- contact_friction
+- object_mass
+baselines:
+- vanilla_mppi
+- robust_mpc
+- ensemble_uncertainty_penalty
+- prediction_calibrated_penalty
+- cvar_ra_mppi
+- chance_constrained_mpc
+- conformal_prediction_mpc
+- conformal_risk_non_ccr
+- conformal_decision_baseline
+- soda_like_fallback
+- domain_randomized_mpc
+- sysid_mpc
+- oracle_mpc
+- ccr_no_calibration
+- calibration_no_ccr
+- disagreement_only
+- regret_only
+- violation_tail_only
+- ccr_mpc
+required_reports:
+- theory_moat_report.md
+- prior_work_distinctions.md
+- experiment_results_summary.md
+- calibration_report.md
+- reviewer_attack_closure_report.md
+- claim_ledger.csv
+- readiness_gate_report.md
+- completion_audit_report.md
+- final_artifact_manifest.json
+quality_gates:
+- scripts/verify_pack.py --smoke
+- no completion message until reports/final_artifact_manifest.json validates against schemas/artifact_manifest_schema.json
+- every headline claim must have at least one artifact row in reports/claim_ledger.csv
+- every paper citation must be verified from primary source metadata before final writing
