@@ -182,6 +182,7 @@ REQUIRED_MANIFEST_ARTIFACTS = {
 }
 ALLOWED_LOG_FILES = {
     "calibration_samples.csv",
+    "dynamics_prediction_metrics.csv",
     "results.jsonl",
     "results_flat.csv",
     "step_predictions.csv",

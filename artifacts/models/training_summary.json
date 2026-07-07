@@ -1,0 +1,21 @@
+{
+  "domains": [
+    "synthetic_separation",
+    "classic_control",
+    "dynamic_bicycle_car",
+    "planar_quadrotor",
+    "quasistatic_pushing",
+    "secondary_planner"
+  ],
+  "model_artifacts": [
+    "artifacts/models/synthetic_separation_torch_mlp_ensemble.pt",
+    "artifacts/models/classic_control_torch_mlp_ensemble.pt",
+    "artifacts/models/dynamic_bicycle_car_torch_mlp_ensemble.pt",
+    "artifacts/models/planar_quadrotor_torch_mlp_ensemble.pt",
+    "artifacts/models/quasistatic_pushing_torch_mlp_ensemble.pt",
+    "artifacts/models/secondary_planner_torch_mlp_ensemble.pt"
+  ],
+  "metrics": "logs/dynamics_prediction_metrics.csv",
+  "report": "reports/dynamics_training_report.md",
+  "figure": "figures/prediction_calibration_vs_control_risk.png"
+}

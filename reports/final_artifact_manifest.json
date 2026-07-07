@@ -7,9 +7,14 @@
       "sha256": "84623e21be3686d218f4827c6c3b39da83fc8d22bdbf3363295e89f6ef8beac7"
     },
     {
+      "description": "CPU trained-dynamics diagnostic script",
+      "path": "scripts/train_learned_dynamics_cpu.py",
+      "sha256": "6bc09eddcb402a31fc2ea30c9865117a84aff044f202a38d6c17c9b7fb20fb99"
+    },
+    {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "3727097ee8b1902406786e85bc895ae07fb15d02ce6a64069307e0503a99773c"
+      "sha256": "d7a51394c3569cf002bff8e2dc64e14ff88e5478a2552a1a5b186dc3770b0614"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -76,6 +81,46 @@
       "sha256": "af6e2e3326010d66bc2c840adf9c8fc327a218725ac47ad0b376129be895b3d1"
     },
     {
+      "description": "Trained dynamics prediction metrics",
+      "path": "logs/dynamics_prediction_metrics.csv",
+      "sha256": "ae0335809af45ef4e6334173a919bd5976579f49b7808ecc8c5b86c59638f89f"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/synthetic_separation_torch_mlp_ensemble.pt",
+      "sha256": "01b06d9ce0bbaf31c9f86ff1a9e74d9e247caaf97018bf0b08c76625bc3ee8e1"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/classic_control_torch_mlp_ensemble.pt",
+      "sha256": "dc578445e9073dd9a7ea9faa16baab05f56d7062b458332408ea716b845379c1"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/dynamic_bicycle_car_torch_mlp_ensemble.pt",
+      "sha256": "55fc3e38561e85f7973081bfc88aaa799fd2baa65739d1d72f8d8b530fd0eb42"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/planar_quadrotor_torch_mlp_ensemble.pt",
+      "sha256": "b856832154fef74f18b1afc14ac5a1a995cfac6c68d69b048865f6f62ed5c503"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/quasistatic_pushing_torch_mlp_ensemble.pt",
+      "sha256": "d27c70c9f6c332ad2e8661b5a5f20a75398c1b5dfedf16517f3c1fb321343bf9"
+    },
+    {
+      "description": "Trained dynamics model artifact",
+      "path": "artifacts/models/secondary_planner_torch_mlp_ensemble.pt",
+      "sha256": "4c954dbb547526c09a4b5f417183402235031e1be6975f7df87af5710fe31519"
+    },
+    {
+      "description": "Trained dynamics model summary",
+      "path": "artifacts/models/training_summary.json",
+      "sha256": "ca56f6f31702b2d05151fd6638586eef89f895d9af54000051049235f09c6942"
+    },
+    {
       "description": "Generated result table",
       "path": "tables/summary_by_method.csv",
       "sha256": "f115772fe6d81c40167cc1d04aebf82ca901b3850b792e446032926da4150111"
@@ -101,7 +146,9 @@
     "Simplified low-dimensional CPU domains, not high-fidelity robot or hardware experiments.",
     "Theory covers a stylized one-step separation, finite-threshold split calibration, and sampled-set optimality only.",
     "Citation metadata has source notes, but final publisher-exported BibTeX should be checked before submission.",
-    "The max-out 57,000-row matrix was not fully executed in this focused run."
+    "The max-out 57,000-row matrix was not fully executed in this focused run.",
+    "The iclr_submission artifacts are Phase-0 seeds copied from the bounded manuscript, not evidence that the max-out prompt is complete.",
+    "The trained dynamics artifacts are diagnostic and are not yet integrated into the planner results."
   ],
   "paper": [
     {
@@ -118,6 +165,16 @@
       "description": "Compiled manuscript PDF",
       "path": "paper/CCR_MPC_paper.pdf",
       "sha256": "04d34c1897f635c265e372ae722355a390fccc5e3126d9fbe4a9a562634a959c"
+    },
+    {
+      "description": "Seeded ICLR submission LaTeX manuscript",
+      "path": "paper/iclr_submission.tex",
+      "sha256": "5d8e5aab807d270a70d0266c6630f006f888699727988bb8e1b70f02f6c9e975"
+    },
+    {
+      "description": "Seeded ICLR submission PDF",
+      "path": "paper/iclr_submission.pdf",
+      "sha256": "16d86ffd5c17cbce28ba6c8fe53e9dcd54a22591c2e56d27e55d725dde431db1"
     },
     {
       "description": "Verified BibTeX references",
@@ -156,6 +213,16 @@
       "description": "Generated figure",
       "path": "figures/compute_time_by_method.png",
       "sha256": "27c9ef19e4df44113f598fee4fd25afc94053f6adbf98f441d7464362a5b8d26"
+    },
+    {
+      "description": "Generated figure",
+      "path": "figures/prediction_calibration_vs_control_risk.png",
+      "sha256": "0e81c6014b3e3501f97129f5a59e1376ee2c2e8e77931ebe705cd2ca6b551e2a"
+    },
+    {
+      "description": "Generated theorem visualization",
+      "path": "figures/theorem_separation_visualization.png",
+      "sha256": "20c0fb603cba0599428c89a66e31f28ba43eba590a32d8504bbeb5287e8ca063"
     }
   ],
   "reports": [
@@ -163,6 +230,46 @@
       "description": "Report: claim_ledger",
       "path": "reports/claim_ledger.csv",
       "sha256": "f267d2a2f4c3d8125aa6086d908096d1c543f86f7523646c9b30426470ae0784"
+    },
+    {
+      "description": "Report: final_claim_ledger seed",
+      "path": "reports/final_claim_ledger.csv",
+      "sha256": "f267d2a2f4c3d8125aa6086d908096d1c543f86f7523646c9b30426470ae0784"
+    },
+    {
+      "description": "Report: preupgrade repository audit",
+      "path": "reports/preupgrade_repo_audit.md",
+      "sha256": "28e1847c2c3c9c1135c9c29c0cdc0c512ccf23903a890b14e30cbcb7390abe54"
+    },
+    {
+      "description": "Report: final submission readiness gate",
+      "path": "reports/final_submission_readiness.md",
+      "sha256": "a00720ed8a29d1a68cb11e747ebb0a2762ecdfac9134003cf5eb14425cc976ba"
+    },
+    {
+      "description": "Report: theorem A separation",
+      "path": "reports/theorem_A_separation.md",
+      "sha256": "bd983883b70e090dc905b2eec62f94cf3e426d282e1b410774832c0e0fd719eb"
+    },
+    {
+      "description": "Report: theorem B calibration",
+      "path": "reports/theorem_B_calibration.md",
+      "sha256": "825a19d155888a503e0d06f5b19ea6f5ee194b9e8ca9a43a6f28575e9b3a222e"
+    },
+    {
+      "description": "Report: theorem C safe-cost",
+      "path": "reports/theorem_C_safe_cost.md",
+      "sha256": "243990c945a403ad0c9f73f9279b9fdb9b2f94be363d1db235c1cb8c5cb9d5bd"
+    },
+    {
+      "description": "Report: dynamics training",
+      "path": "reports/dynamics_training_report.md",
+      "sha256": "708269ad1b902d0bc6be0db9a5396c670a05930547d7f2336819399028f49c28"
+    },
+    {
+      "description": "Report: acceptance-critical result gate",
+      "path": "reports/acceptance_critical_result_gate.md",
+      "sha256": "fafb075de331fbc61e6674581d2891603716ce565dd6730e4760cd9cd8fdc334"
     },
     {
       "description": "Report: theory_moat_report",
