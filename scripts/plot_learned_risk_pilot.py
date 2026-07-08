@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -15,8 +16,16 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Plot learned-risk planner pilot safety/cost tradeoffs.")
+    parser.add_argument("--artifact-tag", default="learned_risk_stage_b_pilot")
+    return parser.parse_args()
+
+
 def main() -> int:
-    summary_path = ROOT / "tables" / "learned_risk_stage_b_pilot_summary_by_method.csv"
+    args = parse_args()
+    artifact_tag = args.artifact_tag
+    summary_path = ROOT / "tables" / f"{artifact_tag}_summary_by_method.csv"
     df = pd.read_csv(summary_path)
     df = df.sort_values(["violation_rate_mean", "cost_mean"])
     labels = {
@@ -47,10 +56,10 @@ def main() -> int:
         )
     ax.set_xlabel("Mean cost")
     ax.set_ylabel("Mean violation rate (%)")
-    ax.set_title("Learned-risk planner pilot: safety/cost tradeoff")
+    ax.set_title(f"{artifact_tag.replace('_', ' ')}: safety/cost tradeoff")
     ax.grid(alpha=0.25)
     fig.tight_layout()
-    out = ROOT / "figures" / "learned_risk_stage_b_pilot_pareto.png"
+    out = ROOT / "figures" / f"{artifact_tag}_pareto.png"
     out.parent.mkdir(exist_ok=True)
     fig.savefig(out, dpi=180)
     plt.close(fig)

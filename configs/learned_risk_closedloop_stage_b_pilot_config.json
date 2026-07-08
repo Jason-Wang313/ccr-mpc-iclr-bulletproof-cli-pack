@@ -1,0 +1,269 @@
+{
+  "args": {
+    "artifact_tag": "learned_risk_closedloop_stage_b_pilot",
+    "calibration_contexts": 24,
+    "candidates": 32,
+    "domains": "all",
+    "levels": "L0,L1,L2,L3",
+    "methods": "vanilla_mppi,cvar_ra_mppi,conformal_prediction_mpc,conformal_risk_non_ccr,ccr_mpc,learned_risk_executed_logistic,learned_risk_executed_selected,oracle_mpc",
+    "risk_label": "plan_failure",
+    "seeds": "15,16,17,18,19",
+    "selected_risk_model": "logistic"
+  },
+  "code_hash": "c4d938f8a0cee052239f98e37ff3f017249371c460257dc602ee323dc0a72a08",
+  "created_utc": "2026-07-08T10:23:07.674860+00:00",
+  "domains": [
+    {
+      "action_limit": 1.0,
+      "base_bias": 0.0,
+      "base_damping": 0.22,
+      "base_gain": 1.05,
+      "dt": 0.12,
+      "horizon": 7,
+      "init_pos": 0.02,
+      "init_std": 0.035,
+      "init_vel": 0.0,
+      "label": "D0 synthetic separation",
+      "mass": 1.0,
+      "name": "synthetic_separation",
+      "nonlin": 0.03,
+      "planner": "MPPI",
+      "process_noise": 0.004,
+      "safe_limit": 1.0,
+      "shift_name": "actuator_gain_and_bias",
+      "steps": 18,
+      "target": 1.08
+    },
+    {
+      "action_limit": 1.2,
+      "base_bias": 0.0,
+      "base_damping": 0.18,
+      "base_gain": 1.15,
+      "dt": 0.1,
+      "horizon": 8,
+      "init_pos": -0.2,
+      "init_std": 0.045,
+      "init_vel": 0.0,
+      "label": "D1 constrained double-integrator",
+      "mass": 1.0,
+      "name": "classic_control",
+      "nonlin": 0.02,
+      "planner": "MPPI",
+      "process_noise": 0.004,
+      "safe_limit": 1.0,
+      "shift_name": "mass_friction_latency",
+      "steps": 20,
+      "target": 1.05
+    },
+    {
+      "action_limit": 1.0,
+      "base_bias": 0.0,
+      "base_damping": 0.42,
+      "base_gain": 1.3,
+      "dt": 0.1,
+      "horizon": 8,
+      "init_pos": 0.43,
+      "init_std": 0.05,
+      "init_vel": -0.05,
+      "label": "D2 lateral car surrogate",
+      "mass": 1.0,
+      "name": "dynamic_bicycle_car",
+      "nonlin": 0.08,
+      "planner": "MPPI",
+      "process_noise": 0.005,
+      "safe_limit": 0.48,
+      "shift_name": "friction_steering_bias",
+      "steps": 22,
+      "target": 0.0
+    },
+    {
+      "action_limit": 1.15,
+      "base_bias": 0.0,
+      "base_damping": 0.26,
+      "base_gain": 1.05,
+      "dt": 0.08,
+      "horizon": 8,
+      "init_pos": 0.1,
+      "init_std": 0.04,
+      "init_vel": 0.0,
+      "label": "D3 planar quadrotor altitude surrogate",
+      "mass": 1.0,
+      "name": "planar_quadrotor",
+      "nonlin": 0.01,
+      "planner": "MPPI",
+      "process_noise": 0.006,
+      "safe_limit": 1.05,
+      "shift_name": "wind_payload_latency",
+      "steps": 22,
+      "target": 1.13
+    },
+    {
+      "action_limit": 1.1,
+      "base_bias": 0.0,
+      "base_damping": 0.7,
+      "base_gain": 0.85,
+      "dt": 0.12,
+      "horizon": 7,
+      "init_pos": -0.1,
+      "init_std": 0.04,
+      "init_vel": 0.0,
+      "label": "D4 quasi-static pushing surrogate",
+      "mass": 1.25,
+      "name": "quasistatic_pushing",
+      "nonlin": 0.04,
+      "planner": "MPPI",
+      "process_noise": 0.006,
+      "safe_limit": 0.95,
+      "shift_name": "contact_friction_object_mass",
+      "steps": 20,
+      "target": 1.02
+    },
+    {
+      "action_limit": 1.2,
+      "base_bias": 0.0,
+      "base_damping": 0.18,
+      "base_gain": 1.15,
+      "dt": 0.1,
+      "horizon": 8,
+      "init_pos": -0.2,
+      "init_std": 0.045,
+      "init_vel": 0.0,
+      "label": "D5 CEM-MPC secondary planner",
+      "mass": 1.0,
+      "name": "secondary_planner",
+      "nonlin": 0.02,
+      "planner": "CEM-MPC",
+      "process_noise": 0.004,
+      "safe_limit": 1.0,
+      "shift_name": "secondary_planner_mass_friction",
+      "steps": 20,
+      "target": 1.05
+    }
+  ],
+  "execution_record_type": "learned_risk_closedloop_stage_b_pilot",
+  "execution_seconds": 682.5926382000034,
+  "model_artifacts": {
+    "classic_control": {
+      "path": "artifacts/models/classic_control_torch_mlp_ensemble.pt",
+      "sha256": "dc578445e9073dd9a7ea9faa16baab05f56d7062b458332408ea716b845379c1"
+    },
+    "dynamic_bicycle_car": {
+      "path": "artifacts/models/dynamic_bicycle_car_torch_mlp_ensemble.pt",
+      "sha256": "55fc3e38561e85f7973081bfc88aaa799fd2baa65739d1d72f8d8b530fd0eb42"
+    },
+    "planar_quadrotor": {
+      "path": "artifacts/models/planar_quadrotor_torch_mlp_ensemble.pt",
+      "sha256": "b856832154fef74f18b1afc14ac5a1a995cfac6c68d69b048865f6f62ed5c503"
+    },
+    "quasistatic_pushing": {
+      "path": "artifacts/models/quasistatic_pushing_torch_mlp_ensemble.pt",
+      "sha256": "d27c70c9f6c332ad2e8661b5a5f20a75398c1b5dfedf16517f3c1fb321343bf9"
+    },
+    "secondary_planner": {
+      "path": "artifacts/models/secondary_planner_torch_mlp_ensemble.pt",
+      "sha256": "4c954dbb547526c09a4b5f417183402235031e1be6975f7df87af5710fe31519"
+    },
+    "synthetic_separation": {
+      "path": "artifacts/models/synthetic_separation_torch_mlp_ensemble.pt",
+      "sha256": "01b06d9ce0bbaf31c9f86ff1a9e74d9e247caaf97018bf0b08c76625bc3ee8e1"
+    }
+  },
+  "model_source": "trained_torch_mlp_ensemble",
+  "risk_model_selection": [
+    {
+      "accept_rate": 0.8803925798101812,
+      "accepted_count": 8163.0,
+      "accepted_failure_rate": 0.14994487320837926,
+      "brier": 0.04538043198111751,
+      "n": 9272,
+      "positive_rate": 0.2512942191544435,
+      "risk_model": "logistic",
+      "roc_auc": 0.9724368557131252,
+      "split": "validation_seed_3",
+      "threshold": 0.9999415953634321
+    },
+    {
+      "accept_rate": 0.896786022433132,
+      "accepted_count": 8315.0,
+      "accepted_failure_rate": 0.14996993385447985,
+      "brier": 0.04715421386934397,
+      "n": 9272,
+      "positive_rate": 0.23770491803278687,
+      "risk_model": "logistic",
+      "roc_auc": 0.9719198488728114,
+      "split": "heldout_seed_4",
+      "threshold": 0.9999484106507337
+    },
+    {
+      "accept_rate": 0.8789905090595341,
+      "accepted_count": 8150.0,
+      "accepted_failure_rate": 0.14822085889570552,
+      "brier": 0.039476319964594074,
+      "n": 9272,
+      "positive_rate": 0.2512942191544435,
+      "risk_model": "random_forest",
+      "roc_auc": 0.9809577331735791,
+      "split": "validation_seed_3",
+      "threshold": 0.9960963706506695
+    },
+    {
+      "accept_rate": 0.896786022433132,
+      "accepted_count": 8315.0,
+      "accepted_failure_rate": 0.14996993385447985,
+      "brier": 0.04087727758576653,
+      "n": 9272,
+      "positive_rate": 0.23770491803278687,
+      "risk_model": "random_forest",
+      "roc_auc": 0.9784439748895098,
+      "split": "heldout_seed_4",
+      "threshold": 0.99610922848189
+    }
+  ],
+  "run_settings": {
+    "calibration_contexts": 24,
+    "domains": [
+      "synthetic_separation",
+      "classic_control",
+      "dynamic_bicycle_car",
+      "planar_quadrotor",
+      "quasistatic_pushing",
+      "secondary_planner"
+    ],
+    "feature_names": [
+      "combined",
+      "regret_cvar",
+      "violation_tail",
+      "rank_instability",
+      "uncertainty",
+      "pred_violation_rate"
+    ],
+    "levels": [
+      "L0",
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "methods": [
+      "vanilla_mppi",
+      "cvar_ra_mppi",
+      "conformal_prediction_mpc",
+      "conformal_risk_non_ccr",
+      "ccr_mpc",
+      "learned_risk_executed_logistic",
+      "learned_risk_executed_selected",
+      "oracle_mpc"
+    ],
+    "num_candidates": 32,
+    "risk_label": "plan_failure",
+    "seeds": [
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "selected_risk_model": "logistic",
+    "selected_risk_model_mode": "logistic",
+    "target_risk": 0.15
+  }
+}

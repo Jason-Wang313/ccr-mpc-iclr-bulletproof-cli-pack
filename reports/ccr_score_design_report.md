@@ -29,6 +29,7 @@ Preliminary design and current implementation audit. The repository has hand-wei
 - Trained-dynamics Stage A: `tables/trained_dynamics_stage_a_summary_by_method.csv`
 - Trained-dynamics Stage-B pilot: `tables/trained_dynamics_stage_b_pilot_summary_by_method.csv`
 - Learned-risk planner pilot: `tables/learned_risk_stage_b_pilot_summary_by_method.csv`
+- Closed-loop-selected learned-risk pilot: `tables/learned_risk_closedloop_stage_b_pilot_summary_by_method.csv`
 - Reliability plot: `figures/risk_reliability.png`
 - Dynamics calibration diagnostic: `figures/prediction_calibration_vs_control_risk.png`
 - Preliminary risk-model validation: `logs/risk_model_validation.csv`
@@ -57,11 +58,15 @@ In the held-out trained-dynamics Stage-B pilot, CCR-MPC improves violation over 
 
 `scripts/run_learned_risk_planner_pilot.py` integrates logistic and random-forest learned risk models into MPC candidate selection using executed selected rollouts from Stage-A as the training source. In the held-out learned-risk pilot, the logistic variant slightly improves over CCR-MPC on both cost and violation, but the random-forest model selected by validation Brier performs poorly in closed loop. This means the next model-selection rule should include closed-loop validation or a parsimony/latency criterion, not Brier score alone.
 
+## Closed-Loop Selection Finding
+
+The follow-up closed-loop-selected pilot deploys the logistic model on fresh seeds 15-19. It improves over vanilla MPPI, but loses to CCR-MPC, CVaR/RA-MPPI, conformal risk, conformal prediction, and oracle MPC on violation rate. This closes the easy model-selection loophole: the remaining gap is not only Brier-vs-closed-loop selection, but the strength of the learned-risk decision rule itself under these domains and baselines.
+
 ## Missing For Max-Out
 
 - Planner integration for logistic/random-forest risk models is present in a pilot; isotonic/gradient-boosting and final selection logic remain missing.
 - Gradient-boosting risk model when available.
-- Closed-loop-aware validation-set model selection before held-out testing.
+- A stronger learned-risk decision rule or data-collection protocol; closed-loop-selected logistic still does not beat the strongest baselines.
 - Fresh held-out Stage-B/Stage-C evaluation after selecting the risk model.
 
 ## Claim Boundary

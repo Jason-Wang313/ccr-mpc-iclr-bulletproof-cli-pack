@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "0dd7d996b51df846ac1ed6c905ffa1463ee69ce23757b4cc209c67c19e3d2e03"
+      "sha256": "ace59b6358d2f47415f0fc596faeb1513b91648d710c3a6f96b4e6ff4772f2ee"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -92,14 +92,14 @@
       "sha256": "ec42736ad39ea932a7f223e992e78127c70210a9b523cfb4c59425627918bb7a"
     },
     {
-      "description": "Learned-risk planner pilot runner",
+      "description": "Learned-risk planner pilot runner with selected-model override",
       "path": "scripts/run_learned_risk_planner_pilot.py",
-      "sha256": "ebc93391527a9152458ba42aa8aa90cea58fcd16cfd15b24713b26457f82eba4"
+      "sha256": "c4d938f8a0cee052239f98e37ff3f017249371c460257dc602ee323dc0a72a08"
     },
     {
       "description": "Learned-risk pilot plotting script",
       "path": "scripts/plot_learned_risk_pilot.py",
-      "sha256": "a58f0cf34a0e91913c373dff7de1c868aba21fc6aa15d8e86bf11c5208085916"
+      "sha256": "2fe2f9bf131719808ce5ee43dd73937a0fe8e4c10d5da03082e9ff5ce36570dc"
     }
   ],
   "completion_message": "ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms, calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript, related-work audit, and reviewer-defense reports are finished. All claims are backed by generated artifacts. Human review is required before submission.",
@@ -334,6 +334,46 @@
       "description": "Learned-risk Stage-B pilot risk model selection table",
       "path": "tables/learned_risk_stage_b_pilot_risk_model_selection.csv",
       "sha256": "18b536f92a619b7bf478997c3e7e9b35f7da6e0904fab71ef36a6fd313fd9c3b"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot config",
+      "path": "configs/learned_risk_closedloop_stage_b_pilot_config.json",
+      "sha256": "11bd264e46bd023f277ff74138e8c3a3a7a8562d47610dc8fb8c653ef26e281d"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot result log",
+      "path": "logs/learned_risk_closedloop_stage_b_pilot_results.jsonl",
+      "sha256": "9cab8bca3ebd939eab14f68aaffe3c3560ef39ddecf9f2a5cb8ad21b9b3681ee"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot flat results",
+      "path": "logs/learned_risk_closedloop_stage_b_pilot_results_flat.csv",
+      "sha256": "b7125d69e855b7edc506549c500142cd4d92daa1e9a8f7516ad02c907a7e1aa9"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot step predictions",
+      "path": "logs/learned_risk_closedloop_stage_b_pilot_step_predictions.csv",
+      "sha256": "d8625dcab6585416df58f163de27169c0c4c1754911db91ca2445f3acb5cfd83"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot calibration samples",
+      "path": "logs/learned_risk_closedloop_stage_b_pilot_calibration_samples.csv",
+      "sha256": "35118621d5be51d34fe92aafd044a2707f8a88f5319896b7afcb3bd14336caae"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot method summary",
+      "path": "tables/learned_risk_closedloop_stage_b_pilot_summary_by_method.csv",
+      "sha256": "228d02eb46bf71e5dc9b577104c3e583b088051d19f5bdb4c442b4ac2e49f8ee"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot domain-method summary",
+      "path": "tables/learned_risk_closedloop_stage_b_pilot_summary_by_domain_method.csv",
+      "sha256": "565b894db55caf266ec60dadcadbee3f54cdc6ad9faaabfaf75a6a79e5937e8d"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot model-selection table",
+      "path": "tables/learned_risk_closedloop_stage_b_pilot_risk_model_selection.csv",
+      "sha256": "7be1a224abec3544b4873c0810716cbaebaa84a38a6f51ecd48db94872be86e2"
     }
   ],
   "git_commit": "not-a-git-repository",
@@ -353,7 +393,9 @@
     "Theorem D is a sketch plus diagnostic only; the hand-coded severity weight is not a validated density-ratio estimator.",
     "Shift-weighted calibration is often too conservative in the current L3 diagnostic, with most score/alpha settings rejecting all candidates.",
     "The learned-risk planner pilot shows logistic learned risk slightly improves over CCR-MPC, but validation-Brier selection picked a random forest that performed poorly in closed loop.",
-    "Learned risk models are trained from prior selected rollouts and then applied to all sampled candidates; this selected-action to all-candidate shift remains a limitation."
+    "Learned risk models are trained from prior selected rollouts and then applied to all sampled candidates; this selected-action to all-candidate shift remains a limitation.",
+    "The closed-loop-selected learned-risk pilot improves over vanilla but does not beat CCR-MPC, CVaR/RA-MPPI, conformal risk, conformal prediction, or oracle MPC on violation rate.",
+    "The best local learned-risk selection improvement appears exhausted without changing the calibration data-collection protocol or method objective."
   ],
   "paper": [
     {
@@ -453,6 +495,11 @@
       "description": "Learned-risk Stage-B pilot Pareto plot",
       "path": "figures/learned_risk_stage_b_pilot_pareto.png",
       "sha256": "fe80bf6c63e1e4eaddd4dfd1688b64faf20fcd2ec56b6773b315080005d87029"
+    },
+    {
+      "description": "Closed-loop-selected learned-risk pilot Pareto plot",
+      "path": "figures/learned_risk_closedloop_stage_b_pilot_pareto.png",
+      "sha256": "f094f28016e2265a14b543eb97618d72ab9176c2610371b1f1af64e42dccea86"
     }
   ],
   "reports": [
@@ -469,12 +516,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "cda571e3149a31e74a1b725c492970f9367c992c05dcb8f5a95f2f5c4770fd6d"
+      "sha256": "dbc2022bdd4b4602e4ff4b1274a62e3ec87d626345d900f344fcd1eee29565d1"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "7e122ca73bd98e3956f5a1349c178acf94d5410a084e00ac71e1154025df7182"
+      "sha256": "32fe0ef4efebedbd5bbbbe0daaacd2ce6c27686f2241f8a7257fdea82fe1ce87"
     },
     {
       "description": "Report: theorem A separation",
@@ -499,7 +546,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "63b6d631778ba6469ec95f5e698cc6fa9a8028262580a983c83cddcfaede317b"
+      "sha256": "3b8e009ecb718b871ce236b01bf6593eb022c279be0c4914cfb4aa521b14382f"
     },
     {
       "description": "Report: theory_moat_report",
@@ -614,7 +661,7 @@
     {
       "description": "Codex handoff",
       "path": "docs/CODEX_HANDOFF.md",
-      "sha256": "2d3087db8a7ed05033c6ac708918ccb093d5c4db3f5158777ac46b8d12888cf4"
+      "sha256": "7dc499dd7a9e041e1e9f7e045edb97ec054ebacb665fc3640e2db782d7c0059f"
     },
     {
       "description": "Report: trained-dynamics Stage-A",
@@ -629,12 +676,12 @@
     {
       "description": "Report: baseline fairness",
       "path": "reports/baseline_fairness_report.md",
-      "sha256": "4eb3fda33a57c6934fe17ee36182afcfa86d136a4641664a7328a69d601f1e81"
+      "sha256": "f2d650dfec6873f67dd054888f024ba9dbc0efdaf4f4463d1d6d4e235fb5fc73"
     },
     {
       "description": "Report: CCR score design",
       "path": "reports/ccr_score_design_report.md",
-      "sha256": "e82b864ad2510d05ee387b57b6ed130fab31e421923e1632c96297602c34b885"
+      "sha256": "3c6899f5082597f198738ffc38b332ccb12361ac1fe2709c3e3a2a92fa551005"
     },
     {
       "description": "Report: risk model validation",
@@ -675,6 +722,11 @@
       "description": "Report: learned-risk planner pilot",
       "path": "reports/learned_risk_stage_b_pilot_report.md",
       "sha256": "e2211fd9d496c522968baefdf6243471734f5b3f063f9728143b78ab3a2da5fa"
+    },
+    {
+      "description": "Report: closed-loop-selected learned-risk planner pilot",
+      "path": "reports/learned_risk_closedloop_stage_b_pilot_report.md",
+      "sha256": "6fb909a929af3dc30e1f42fbcfd5a2c6088878afeb9e1b904a7852840af031c8"
     }
   ],
   "theory": [

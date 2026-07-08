@@ -10,6 +10,7 @@ Preliminary. The focused surrogate suite and trained-dynamics Stage-A suite incl
 - Within trained-dynamics Stage A, all non-oracle methods use the same trained Torch MLP ensemble candidate evaluator on D0-D5, levels L0-L3, seeds 0-4, 24 candidates, and 24 calibration contexts per domain/level.
 - Within the trained-dynamics Stage-B pilot, the eight key methods share D0-D5, levels L0-L3, held-out seeds 5-9, 32 candidates, and 32 calibration contexts per domain/level.
 - Within the learned-risk planner pilot, the ten compared methods share D0-D5, levels L0-L3, held-out seeds 10-14, 32 candidates, and 24 baseline-gate calibration contexts per domain/level.
+- Within the closed-loop-selected learned-risk pilot, the eight compared methods share D0-D5, levels L0-L3, held-out seeds 15-19, 32 candidates, and 24 baseline-gate calibration contexts per domain/level.
 - `oracle_mpc` uses the true simulator candidate evaluator in both suites and is reported as an oracle reference, not a fair deployable baseline.
 
 ## What Is Not Yet Fair Enough For Final Claims
@@ -18,6 +19,7 @@ Preliminary. The focused surrogate suite and trained-dynamics Stage-A suite incl
 - Hyperparameter sweeps in `configs/baseline_sweeps.yaml` are specified but not fully executed.
 - The Stage-B pilot covers eight key methods and one budget setting; it is not the full all-method, multi-budget Stage-B requirement.
 - The learned-risk pilot trains risk models from previous selected rollouts and applies them to all sampled candidates; this is a real integration test but not a final fair model-selection protocol.
+- The closed-loop-selected learned-risk pilot fixes the previous Brier-selection mistake but still uses prior selected-rollout labels rather than a newly randomized candidate-label calibration collection.
 - Baseline winners are not hidden: in trained Stage A, conformal prediction/risk gates reach zero aggregate violation at higher cost/freezing, and CCR-MPC does not dominate them.
 
 ## Current Evidence
@@ -26,6 +28,7 @@ Preliminary. The focused surrogate suite and trained-dynamics Stage-A suite incl
 - Trained-dynamics Stage A: `tables/trained_dynamics_stage_a_summary_by_method.csv`
 - Trained-dynamics Stage-B pilot: `tables/trained_dynamics_stage_b_pilot_summary_by_method.csv`
 - Learned-risk planner pilot: `tables/learned_risk_stage_b_pilot_summary_by_method.csv`
+- Closed-loop-selected learned-risk pilot: `tables/learned_risk_closedloop_stage_b_pilot_summary_by_method.csv`
 - Sweep plan: `configs/baseline_sweeps.yaml`
 - Tuning summary: `tables/baseline_tuning_summary.csv`
 

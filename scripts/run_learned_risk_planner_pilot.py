@@ -171,7 +171,7 @@ def model_metrics(name: str, model: object, x: np.ndarray, y: np.ndarray, alpha:
     }
 
 
-def fit_learned_risk_models(step_log: Path, label: str, alpha: float) -> LearnedRiskModels:
+def fit_learned_risk_models(step_log: Path, label: str, alpha: float, selected_override: str = "auto") -> LearnedRiskModels:
     df = pd.read_csv(step_log)
     missing = [name for name in FEATURE_NAMES + [label, "seed"] if name not in df.columns]
     if missing:
@@ -220,9 +220,14 @@ def fit_learned_risk_models(step_log: Path, label: str, alpha: float) -> Learned
         validation_rows.extend([validation_row, test_row])
         thresholds[name] = float(validation_row["threshold"])
 
-    selectable = [row for row in validation_rows if row["split"] == "validation_seed_3"]
-    selectable.sort(key=lambda row: (float(row["brier"]), -float(row["accept_rate"])))
-    selected_name = str(selectable[0]["risk_model"])
+    if selected_override == "auto":
+        selectable = [row for row in validation_rows if row["split"] == "validation_seed_3"]
+        selectable.sort(key=lambda row: (float(row["brier"]), -float(row["accept_rate"])))
+        selected_name = str(selectable[0]["risk_model"])
+    else:
+        if selected_override not in models:
+            raise ValueError(f"unknown selected risk model override: {selected_override}")
+        selected_name = selected_override
     return LearnedRiskModels(models, selected_name, thresholds, validation_rows, label)
 
 
@@ -426,7 +431,7 @@ def write_report(
         "",
         "## Status",
         "",
-        "This pilot trains logistic and random-forest risk models on executed selected rollouts from Stage-A seeds 0-2, selects the model and threshold on seed 3, checks seed 4, then uses the learned risk model inside MPC candidate selection on fresh held-out seeds.",
+        "This pilot trains logistic and random-forest risk models on executed selected rollouts from Stage-A seeds 0-2, selects or overrides the deployment model, then uses the learned risk model inside MPC candidate selection on fresh held-out seeds.",
         "",
         "## Scope",
         "",
@@ -438,6 +443,7 @@ def write_report(
         f"- Calibration contexts per domain/level for baseline gates: {args.calibration_contexts}",
         f"- Executed-rollout risk label: `{args.risk_label}`",
         f"- Selected risk model: `{learned.selected_name}`",
+        f"- Selection mode: `{args.selected_risk_model}`",
         f"- Runtime seconds: {elapsed_s:.2f}",
         "",
         "## Key Aggregate Rows",
@@ -492,6 +498,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--calibration-contexts", type=int, default=24)
     parser.add_argument("--artifact-tag", default="learned_risk_stage_b_pilot")
     parser.add_argument("--risk-label", default="plan_failure", choices=["plan_failure", "step_violation"])
+    parser.add_argument("--selected-risk-model", default="auto", choices=["auto", "logistic", "random_forest"])
     return parser.parse_args(argv)
 
 
@@ -505,6 +512,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         ROOT / "logs" / "trained_dynamics_stage_a_step_predictions.csv",
         args.risk_label,
         TARGET_RISK,
+        args.selected_risk_model,
     )
 
     all_domains = domain_specs()
@@ -599,6 +607,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "target_risk": TARGET_RISK,
             "risk_label": args.risk_label,
             "selected_risk_model": learned.selected_name,
+            "selected_risk_model_mode": args.selected_risk_model,
             "feature_names": FEATURE_NAMES,
         },
         "execution_seconds": elapsed_s,

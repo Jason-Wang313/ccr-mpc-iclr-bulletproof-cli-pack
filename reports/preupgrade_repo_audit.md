@@ -144,6 +144,16 @@ At the start of this execution, the local repo did not contain verified artifact
 - `tables/learned_risk_stage_b_pilot_risk_model_selection.csv`
 - `reports/learned_risk_stage_b_pilot_report.md`
 - `figures/learned_risk_stage_b_pilot_pareto.png`
+- `logs/learned_risk_closedloop_stage_b_pilot_results.jsonl`
+- `logs/learned_risk_closedloop_stage_b_pilot_results_flat.csv`
+- `logs/learned_risk_closedloop_stage_b_pilot_step_predictions.csv`
+- `logs/learned_risk_closedloop_stage_b_pilot_calibration_samples.csv`
+- `configs/learned_risk_closedloop_stage_b_pilot_config.json`
+- `tables/learned_risk_closedloop_stage_b_pilot_summary_by_method.csv`
+- `tables/learned_risk_closedloop_stage_b_pilot_summary_by_domain_method.csv`
+- `tables/learned_risk_closedloop_stage_b_pilot_risk_model_selection.csv`
+- `reports/learned_risk_closedloop_stage_b_pilot_report.md`
+- `figures/learned_risk_closedloop_stage_b_pilot_pareto.png`
 - `configs/baseline_sweeps.yaml`
 - `tables/baseline_tuning_summary.csv`
 - `reports/baseline_fairness_report.md`
@@ -173,7 +183,7 @@ At the start of this execution, the local repo did not contain verified artifact
 - The theorem-specific reports still require human theorem review.
 - Optional theorem D now has a weighted/adaptive shift-calibration sketch and diagnostic, but not a final proof.
 - Higher-dimensional CPU domain prototypes now exist and pass smoke validation, but they are not integrated into the main MPC result suite or trained Stage-A experiments.
-- Learned risk models are integrated into a held-out planner pilot, but validation-Brier model selection does not yet translate reliably to closed-loop planner performance.
+- Learned risk models are integrated into held-out planner pilots, but neither validation-Brier selection nor closed-loop-selected logistic deployment beats the strongest baselines.
 - Full validation-selected baseline sweeps remain missing.
 - A Stage-A executed-rollout calibration split exists, but a fresh pre-registered Stage-B calibration/test split remains missing.
 - A Stage-B pilot exists, but full Stage B or Stage C max-out execution remains missing.
@@ -194,4 +204,4 @@ At the start of this execution, the local repo did not contain verified artifact
 
 ## Current Phase-0 Decision
 
-The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic, Stage-A trained-dynamics, Stage-B pilot, learned-risk planner pilot, executed-rollout calibration-split, weighted shift-calibration sketch, and higher-dimensional domain-prototype artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until broader trained-dynamics integration, main-runner domain integration, fresh Stage-B calibration, closed-loop-aware model selection, validation-selected baseline sweeps, full max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.
+The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic, Stage-A trained-dynamics, Stage-B pilot, learned-risk planner pilots, executed-rollout calibration-split, weighted shift-calibration sketch, and higher-dimensional domain-prototype artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until broader trained-dynamics integration, main-runner domain integration, fresh Stage-B calibration, stronger learned-risk data/selection, validation-selected baseline sweeps, full max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.
