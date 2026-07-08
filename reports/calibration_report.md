@@ -27,6 +27,13 @@ Validation-selected held-out averages:
 
 This supports a narrower step-level executed-rollout calibration diagnostic. It does not yet establish episode-level plan-failure control.
 
+## Shift-Weighted Calibration Diagnostic
+
+See `reports/shift_weighted_calibration_report.md` and `reports/theorem_D_shift_calibration.md`.
+Using L0-L2 calibration contexts and L3 shifted test data, 85.42% of score/alpha settings reject all shifted candidates. The clearest nonzero-acceptance case is violation-rate score at alpha 0.10, where severity weighting changes the L3 accept rate from 0.6813 to 0.6728 and the accepted failure rate from 0.1461 to 0.1376.
+
+This is useful as a theorem-D sketch diagnostic, but it is not a deployable adaptive-calibration guarantee.
+
 ## Limitation
 
-Risk predictions are calibrated on sampled candidate contexts and Stage-A executed rollouts from the same simplified simulator family. This is weaker than a deployment guarantee under arbitrary online shift, and the new executed-rollout split still shows high accepted plan-failure rates.
+Risk predictions are calibrated on sampled candidate contexts and Stage-A executed rollouts from the same simplified simulator family. This is weaker than a deployment guarantee under arbitrary online shift. The executed-rollout split still shows high accepted plan-failure rates, and the shifted-calibration diagnostic is often too conservative.

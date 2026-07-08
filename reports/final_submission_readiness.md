@@ -9,7 +9,7 @@ Not final-submission-ready as of 2026-07-08.
 - `python scripts\verify_pack.py --smoke` passes with `PACK VERIFY PASSED: 0 warning(s)`.
 - `paper/iclr_submission.tex` has been seeded from the bounded manuscript `paper/CCR_MPC_paper.tex`.
 - `reports/final_claim_ledger.csv` has been seeded from `reports/claim_ledger.csv`.
-- Theorem-specific reports A/B/C have been added as bounded proof reports.
+- Theorem-specific reports A/B/C have been added as bounded proof reports; theorem D has been added only as a sketch plus shifted-calibration diagnostic.
 - CPU-trained Torch MLP dynamics ensembles have been added as diagnostics.
 - Trained-dynamics Stage A has been executed on D0-D5 with all 19 methods, L0-L3, and seeds 0-4.
 - Preliminary risk-model validation has been generated for single-feature, logistic, isotonic, and random-forest score models.
@@ -31,7 +31,7 @@ Not final-submission-ready as of 2026-07-08.
 ## Blocking Gates
 
 - Trained learned-dynamics ensembles are integrated into a separate Stage-A runner, but not yet into the original focused-suite runner as a first-class `--model-source` option.
-- Theorem-specific reports A/B/C are present, but theorem D is not implemented and A/B/C still require human theorem review.
+- Theorem-specific reports A/B/C are present, and theorem D is a sketch/diagnostic only; all theorem reports still require human theorem review.
 - Higher-dimensional CPU domain prototypes are present and smoke-validated, but not integrated into the main MPC runner or Stage-A trained-dynamics experiments.
 - Expanded Stage-A trained-dynamics artifacts and a Stage-B pilot are present; full Stage B and Stage C max-out execution artifacts are not.
 - The acceptance-critical result gate exists and currently rejects a broad superiority claim.

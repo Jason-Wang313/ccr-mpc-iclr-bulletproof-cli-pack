@@ -11,7 +11,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - Baseline before edits was up to date with `origin/main`.
 - Existing focused CPU suite remains 1026 closed-loop runs and 20862 planning-step predictions.
 - Existing verifier now passes after this continuation checkpoint: `PACK VERIFY PASSED: 0 warning(s)`.
-- Manifest now verifies 114 artifact entries.
+- Manifest now verifies 118 artifact entries.
 - New `paper/iclr_submission.tex` and `paper/iclr_submission.pdf` are seeded from the bounded manuscript, not a final max-out rewrite.
 - New trained dynamics artifacts are diagnostic in the original focused suite and integrated in the separate Stage-A runner `scripts/run_trained_dynamics_stage_a.py`.
 
@@ -24,6 +24,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - `reports/theorem_A_separation.md`
   - `reports/theorem_B_calibration.md`
   - `reports/theorem_C_safe_cost.md`
+  - `reports/theorem_D_shift_calibration.md` (sketch/diagnostic only)
 - Added `reports/acceptance_critical_result_gate.md`, which rejects broad superiority claims under current results.
 - Added `scripts/train_learned_dynamics_cpu.py`.
 - Added trained Torch MLP ensemble artifacts under `artifacts/models/`.
@@ -67,6 +68,11 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - `logs/executed_rollout_calibration_split.csv`
   - `tables/executed_rollout_calibration_selection.csv`
   - `reports/executed_rollout_calibration_split.md`
+- Added shifted-calibration diagnostic:
+  - `scripts/evaluate_shift_weighted_calibration.py`
+  - `logs/shift_weighted_calibration.csv`
+  - `reports/shift_weighted_calibration_report.md`
+  - `reports/theorem_D_shift_calibration.md`
 - Added higher-dimensional domain prototypes and validation:
   - `src/domains/high_dimensional.py`
   - `scripts/validate_domain_upgrades.py`
@@ -95,6 +101,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - `python scripts\validate_risk_models.py`: wrote 18 risk-model validation rows.
 - `python scripts\compare_calibration_label_sources.py`: wrote 27 calibration-label-source ablation rows.
 - `python scripts\evaluate_executed_rollout_calibration_split.py`: wrote 1596 split evaluation rows and 76 validation-selected held-out rows.
+- `python scripts\evaluate_shift_weighted_calibration.py`: wrote 144 shifted-calibration diagnostic rows.
 - `python scripts\validate_domain_upgrades.py`: wrote domain validation metrics and four domain schematic figures.
 - Final `python scripts\verify_pack.py --smoke`: `PACK VERIFY PASSED: 0 warning(s)`.
 
@@ -134,6 +141,10 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - Alpha 0.10/0.15/0.20 held-out accepted step-violation rate: 0.0201
   - Alpha 0.10/0.15/0.20 held-out accepted plan-failure rate: 0.2378
   - Most selected score: `violation_tail` with 35 of 76 selected rows.
+- Shift-weighted calibration diagnostic:
+  - L3 shifted test all-failure rate: 0.4182
+  - 85.42% of score/alpha settings reject all shifted L3 candidates.
+  - For violation-rate score at alpha 0.10, severity weighting changes accept rate 0.6813 to 0.6728 and accepted failure 0.1461 to 0.1376.
 - Higher-dimensional domain prototype smoke validation:
   - Cartpole safety: violation rate 1.0000 at L0-L3 under the simple validation policy, so it needs controller/domain tuning before main experiments.
   - Dynamic bicycle 4D: violation rate 0.0000 at L0-L3, likely too easy in this smoke policy.
@@ -148,6 +159,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - Trained Stage-A and Stage-B pilot results are mixed and do not support broad superiority.
 - Higher-dimensional domains are prototypes only; they are not integrated into the main MPC runner or trained Stage-A runner.
 - The executed-rollout calibration split supports step-level diagnostics only; accepted plan-failure rates remain too high for an episode-level guarantee.
+- Theorem D is only a sketch plus diagnostic; the severity weight is hand-coded and often too conservative.
 
 ## Open Questions
 
