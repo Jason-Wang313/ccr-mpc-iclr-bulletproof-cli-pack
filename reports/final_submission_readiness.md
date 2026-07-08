@@ -2,7 +2,7 @@
 
 ## Status
 
-Not final-submission-ready as of 2026-07-07.
+Not final-submission-ready as of 2026-07-08.
 
 ## Verified Starting Point
 
@@ -11,8 +11,10 @@ Not final-submission-ready as of 2026-07-07.
 - `reports/final_claim_ledger.csv` has been seeded from `reports/claim_ledger.csv`.
 - Theorem-specific reports A/B/C have been added as bounded proof reports.
 - CPU-trained Torch MLP dynamics ensembles have been added as diagnostics.
-- Trained-dynamics Stage A has been executed on D0/D1 with all 19 methods, L0-L2, and seeds 0-4.
+- Trained-dynamics Stage A has been executed on D0-D5 with all 19 methods, L0-L3, and seeds 0-4.
 - Preliminary risk-model validation has been generated for single-feature, logistic, isotonic, and random-forest score models.
+- A calibration-label-source ablation has been generated comparing simulator full-candidate labels with executed-rollout labels.
+- Higher-dimensional CPU domain prototypes have been added and smoke-validated, but are not integrated into the main MPC result suite.
 - The current evidence supports a bounded CPU decision-calibration paper, not a strong empirical superiority paper.
 
 ## Passing Evidence Already Present
@@ -28,13 +30,13 @@ Not final-submission-ready as of 2026-07-07.
 
 - Trained learned-dynamics ensembles are integrated into a separate Stage-A runner, but not yet into the original focused-suite runner as a first-class `--model-source` option.
 - Theorem-specific reports A/B/C are present, but theorem D is not implemented and A/B/C still require human theorem review.
-- No high-fidelity or higher-dimensional upgraded domains are present.
-- Stage-A trained-dynamics artifacts are present; Stage B and Stage C max-out execution artifacts are not.
+- Higher-dimensional CPU domain prototypes are present and smoke-validated, but not integrated into the main MPC runner or Stage-A trained-dynamics experiments.
+- Expanded Stage-A trained-dynamics artifacts are present; Stage B and Stage C max-out execution artifacts are not.
 - The acceptance-critical result gate exists and currently rejects a broad superiority claim.
 - Preliminary baseline sweep configuration and tuning summary exist, but validation-selected sweeps have not been executed.
 - Learned risk models are validated diagnostically, but not yet integrated into the planner or tested on held-out Stage B/C runs.
 - No final citation re-audit has been performed for the max-out manuscript.
-- No updated verifier enforces the new max-out artifacts.
+- The verifier permits the new tracked diagnostic logs and manifest-hashes the new artifacts, but it does not yet require Stage B/Stage C max-out coverage.
 
 ## Claim Posture Allowed Right Now
 
@@ -56,4 +58,4 @@ Not allowed:
 
 ## Next Required Step
 
-Expand the trained-dynamics runner beyond D0/D1, add executed-rollout calibration, and execute validation-selected baseline sweeps before strengthening the paper. Stage-A results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal and robust baselines remain stronger on some aggregate metrics.
+Integrate the higher-dimensional domain prototypes into the planner suite, add a dedicated executed-rollout calibration split, integrate learned risk models into the planner, and execute validation-selected baseline sweeps before strengthening the paper. Expanded Stage-A results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal, violation-tail, and robust baselines remain stronger on some aggregate safety metrics.

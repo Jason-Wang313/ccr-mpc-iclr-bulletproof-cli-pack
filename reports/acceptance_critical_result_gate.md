@@ -18,8 +18,8 @@ Current gate result: do not claim broad empirical superiority.
 - CCR-MPC improves mean violation rate over vanilla MPPI in the focused CPU suite: 0.0042087542 versus 0.0114104003.
 - CCR-MPC improves mean violation rate over uncalibrated CCR: 0.0042087542 versus 0.0112233446.
 - CCR-MPC has much lower mean cost than highly conservative fallbacks such as `soda_like_fallback` and `violation_tail_only`.
-- In trained-dynamics Stage A on D0/D1, CCR-MPC improves aggregate violation over vanilla MPPI: 0.0185185 versus 0.0314815.
-- In trained-dynamics Stage A, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0185185 versus 0.0314815.
+- In trained-dynamics Stage A on D0-D5 with L0-L3, CCR-MPC improves aggregate violation over vanilla MPPI: 0.0165741 versus 0.0254798.
+- In trained-dynamics Stage A, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0165741 versus 0.0259049.
 
 ## Where CCR-MPC Ties
 
@@ -31,9 +31,9 @@ Current gate result: do not claim broad empirical superiority.
 - `cvar_ra_mppi` has lower mean cost than CCR-MPC at the same aggregate violation rate: 28.6502721 versus 29.4113151.
 - `conformal_risk_non_ccr` has lower mean cost and only slightly higher violation rate in the aggregate table.
 - `oracle_mpc` and vanilla MPPI have lower mean costs, although with different safety tradeoffs.
-- In trained-dynamics Stage A, `conformal_prediction_mpc` and `conformal_risk_non_ccr` reach zero aggregate violation at higher cost/freezing.
-- In trained-dynamics Stage A, `robust_mpc` has lower cost and lower aggregate violation than CCR-MPC.
-- In trained-dynamics Stage A, the `domain_randomized_mpc` row is also better on both cost and violation, though that trained Stage-A implementation is not yet a fully faithful domain-randomized learned-model baseline.
+- In trained-dynamics Stage A, `conformal_prediction_mpc`, `conformal_risk_non_ccr`, and `violation_tail_only` achieve lower aggregate violation than CCR-MPC at higher cost/freezing.
+- In trained-dynamics Stage A, `robust_mpc` has lower cost and slightly lower aggregate violation than CCR-MPC.
+- In trained-dynamics Stage A, the `domain_randomized_mpc` row is lower cost but slightly higher violation than CCR-MPC; it is not yet a fully faithful domain-randomized learned-model baseline.
 
 ## Allowed Paper Claim
 
@@ -45,4 +45,4 @@ The current evidence does not support a strong-superiority claim over CVaR/RA-MP
 
 ## Max-Out Requirement Before Stronger Claim
 
-A stronger ICLR submission now needs broader trained-dynamics planner integration beyond D0/D1, higher-fidelity domains, validation-selected baseline sweeps, executed-rollout calibration, and Stage B/Stage C experiments. If those still show ties or losses, the paper should remain a diagnostic or mixed-result paper.
+A stronger ICLR submission now needs broader trained-dynamics planner integration, main-runner integration of the new higher-dimensional domain prototypes, validation-selected baseline sweeps, executed-rollout calibration, and Stage B/Stage C experiments. If those still show ties or losses, the paper should remain a diagnostic or mixed-result paper.

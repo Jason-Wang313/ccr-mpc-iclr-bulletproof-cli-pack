@@ -4,7 +4,7 @@
     {
       "description": "CPU execution script",
       "path": "scripts/execute_paper_cpu_study.py",
-      "sha256": "84623e21be3686d218f4827c6c3b39da83fc8d22bdbf3363295e89f6ef8beac7"
+      "sha256": "1a9210d7cb739b9174b6e8df3bab0470d5b1768814f389951568074222727ebc"
     },
     {
       "description": "CPU trained-dynamics diagnostic script",
@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "5ae3700bb68f621871c48da1f198512f657b7096416ce8fd40e187753ca66371"
+      "sha256": "9c92f301016211080cb3a9a52dcca26b5751637336c80ee4b8a0817a7cca4067"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -59,12 +59,27 @@
     {
       "description": "Trained-dynamics Stage-A runner",
       "path": "scripts/run_trained_dynamics_stage_a.py",
-      "sha256": "de51eb081d2e4ad58ba80c3fc056a98f368a2910a0170426362c3989ac65f966"
+      "sha256": "76c47eeee913ac25b569f681571f76dd2e6225db6dfe8f1affe545723931bc86"
     },
     {
       "description": "Risk model validation script",
       "path": "scripts/validate_risk_models.py",
       "sha256": "d31689349bde1f1409328493638497ec1eeb6ad347d77c45086120f410f5fb96"
+    },
+    {
+      "description": "Calibration label-source ablation script",
+      "path": "scripts/compare_calibration_label_sources.py",
+      "sha256": "e5b59a6570b54986ddd58db4e1112dbebd41508047183ca4a2374230505b0e64"
+    },
+    {
+      "description": "Higher-dimensional domain validation script",
+      "path": "scripts/validate_domain_upgrades.py",
+      "sha256": "cd56b1c719ddd2899449b2d7c0ecd75cafb3eb5fff44272ff6bf443dfd91b9c5"
+    },
+    {
+      "description": "Higher-dimensional CPU domain prototypes",
+      "path": "src/domains/high_dimensional.py",
+      "sha256": "f3598b981fcc96588a39b2521016a7d412f46c84dace6ef9649ea4418b0c15c9"
     }
   ],
   "completion_message": "ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms, calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript, related-work audit, and reviewer-defense reports are finished. All claims are backed by generated artifacts. Human review is required before submission.",
@@ -153,7 +168,7 @@
     {
       "description": "Trained-dynamics Stage-A execution config",
       "path": "configs/trained_dynamics_stage_a_config.json",
-      "sha256": "c9b19ea08bb8455d6801fa662412079a6303d890b39c8b425854f2ccef00ed13"
+      "sha256": "050a912cb98d0721d85c604a282a0d2bac82fbedbce7a9128aed6a243147284a"
     },
     {
       "description": "Preliminary baseline sweep plan",
@@ -163,54 +178,65 @@
     {
       "description": "Trained-dynamics Stage-A result log",
       "path": "logs/trained_dynamics_stage_a_results.jsonl",
-      "sha256": "4c7e1e4291bf41d9a2353c00b5303476200c204c2a8578d8d260805bf621ccd3"
+      "sha256": "73fa1a98e4d31f7149dab34607c1befbde804eceab0a7ebe040f9f73392a625f"
     },
     {
       "description": "Trained-dynamics Stage-A flat results",
       "path": "logs/trained_dynamics_stage_a_results_flat.csv",
-      "sha256": "bdbfee50a29d069a5a7eec30ed1b17e10e38641143563f5fb7ed2faf6a254de3"
+      "sha256": "75356b3583d462b080938f47fc633fe6195f1956588ce0d327a37ef46eae52ed"
     },
     {
       "description": "Trained-dynamics Stage-A step predictions",
       "path": "logs/trained_dynamics_stage_a_step_predictions.csv",
-      "sha256": "00036516460855f2debcf406f20aebcbf7b437fbb9280a1db984a2e33d27f431"
+      "sha256": "8664dd0a8b2c42402f4cad79a4322e87722e9b0ef8bd925f6be330caed079590"
     },
     {
       "description": "Trained-dynamics Stage-A calibration samples",
       "path": "logs/trained_dynamics_stage_a_calibration_samples.csv",
-      "sha256": "006dde1f684753b41b248d5adad98c0866881f18d09d0a9ac12cc2173bb66708"
+      "sha256": "35118621d5be51d34fe92aafd044a2707f8a88f5319896b7afcb3bd14336caae"
     },
     {
       "description": "Risk model validation metrics",
       "path": "logs/risk_model_validation.csv",
-      "sha256": "adb134a7484fe3c688cc0d2745e9febe5588f0d5e5c64dc783fa0fff375ad428"
+      "sha256": "69293b3dbe263c1eaacf90003029f091b8275f3b0c55ec6b24dc9db672829d5f"
     },
     {
       "description": "Trained-dynamics Stage-A method summary",
       "path": "tables/trained_dynamics_stage_a_summary_by_method.csv",
-      "sha256": "a8024cdf0edacf8d49fec6780c63ef97b5a04f8e0282f82be58274f5970ac857"
+      "sha256": "3fb9becc9954ec12226ceafad35f72b4882e70dc7980e541a3bbd93748202d86"
     },
     {
       "description": "Trained-dynamics Stage-A domain-method summary",
       "path": "tables/trained_dynamics_stage_a_summary_by_domain_method.csv",
-      "sha256": "d9d298ddf353a86175095ac98fcf10f0068d8ddf68b67636e1c0c5cf6360dff5"
+      "sha256": "ba09db92411ff3c6df0ffa0fe24f3bc2130ee5242b990953f45e324acc0bfb0f"
     },
     {
       "description": "Preliminary baseline tuning summary",
       "path": "tables/baseline_tuning_summary.csv",
       "sha256": "c42b2b14a98f4d4850426ee5b613d5abe1a203736f5fa538191eb38b1b03a9c6"
+    },
+    {
+      "description": "Calibration label-source ablation metrics",
+      "path": "logs/calibration_label_source_ablation.csv",
+      "sha256": "6db58ce1c5e5e981d8aeec41fb50fb6daaaa92d3fdc5ce3f2b5f754d8b0bc0ca"
+    },
+    {
+      "description": "Higher-dimensional domain validation metrics",
+      "path": "logs/domain_validation_metrics.csv",
+      "sha256": "a5b09f108a65bc72f81e69484458393fbe764a876574535212e8207c77121152"
     }
   ],
   "git_commit": "not-a-git-repository",
   "known_limitations": [
-    "Simplified low-dimensional CPU domains, not high-fidelity robot or hardware experiments.",
+    "Simplified low-dimensional CPU domains remain the only integrated main-suite result domains; new higher-dimensional domains are prototypes and are not yet main MPC evidence.",
     "Theory covers a stylized one-step separation, finite-threshold split calibration, and sampled-set optimality only.",
     "Citation metadata has source notes, but final publisher-exported BibTeX should be checked before submission.",
     "The max-out 57,000-row matrix was not fully executed in this focused run.",
     "The iclr_submission artifacts are Phase-0 seeds copied from the bounded manuscript, not evidence that the max-out prompt is complete.",
-    "The trained dynamics artifacts are diagnostic and are not yet integrated into the planner results.",
-    "The trained-dynamics Stage-A run covers only D0/D1 and has mixed results; it is not a Stage-B/Stage-C max-out run.",
-    "Preliminary learned risk-model validation is diagnostic only and is not yet integrated into held-out planner results."
+    "The trained dynamics artifacts are diagnostic and integrated only in the separate Stage-A runner, not the original focused-suite runner.",
+    "The expanded trained-dynamics Stage-A run covers D0-D5, L0-L3, seeds 0-4, and candidate budget 24; it is not a Stage-B/Stage-C max-out run.",
+    "Preliminary learned risk-model validation is diagnostic only and is not yet integrated into held-out planner results.",
+    "Calibration label-source ablation is offline from Stage-A logs and does not replace a dedicated executed-rollout calibration split."
   ],
   "paper": [
     {
@@ -285,6 +311,26 @@
       "description": "Generated theorem visualization",
       "path": "figures/theorem_separation_visualization.png",
       "sha256": "20c0fb603cba0599428c89a66e31f28ba43eba590a32d8504bbeb5287e8ca063"
+    },
+    {
+      "description": "Domain schematic: cartpole safety",
+      "path": "figures/domain_schematic_cartpole_safety.png",
+      "sha256": "7ea4507bdf202a40d926976b8869c45796ae07ea7c04022845269ec969bef8c7"
+    },
+    {
+      "description": "Domain schematic: dynamic bicycle 4D",
+      "path": "figures/domain_schematic_dynamic_bicycle_4d.png",
+      "sha256": "b70847e093166ca8f285fe2860c9d0fd2db83ff97e521ffecdcc6b93f771d8a6"
+    },
+    {
+      "description": "Domain schematic: planar quadrotor 6D",
+      "path": "figures/domain_schematic_planar_quadrotor_6d.png",
+      "sha256": "e1981144214251d3681020bfdb222d1e7dfd0b8f42553859b4385e86bd701c3b"
+    },
+    {
+      "description": "Domain schematic: pushing contact 4D",
+      "path": "figures/domain_schematic_pushing_contact_4d.png",
+      "sha256": "53851125d75c4c0ebc3fa6e6bc7aba2c6aa0d604f6491acfc06c66e2556fc8aa"
     }
   ],
   "reports": [
@@ -301,12 +347,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "5a767251fa56763df93195d3ea0cd4110bc98f93c47d0647005ed39969b82cc9"
+      "sha256": "47302819603b10b7808a9d896f2d45e4a42d975a3df85e61cfee8e834a01357f"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "9f24b37ed2458de76b388a875eccd6bc2746fb1d9c5f313098d23a0b1db6e6da"
+      "sha256": "33f89dab4aab268a23ec688058a18e0f6fbfc41d11f28b1d17123dd33692bbce"
     },
     {
       "description": "Report: theorem A separation",
@@ -331,7 +377,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "6a35eaabdebaeda081cc2f896ecd5369e59a92d48d0d7778cd3a20f08fc99496"
+      "sha256": "a270d2dfcfd65fd8e4159bd9fafa20201b6047952d0167945828efa9eb0a580c"
     },
     {
       "description": "Report: theory_moat_report",
@@ -446,12 +492,12 @@
     {
       "description": "Codex handoff",
       "path": "docs/CODEX_HANDOFF.md",
-      "sha256": "8c048c69d1c36822640c965e6bdf30494f28ffbf7ddd268bb1de4371aec9fa52"
+      "sha256": "ba937e575de7438257350513485a8f1628bd6ce04c2b8afa6e6d031613f4f40f"
     },
     {
       "description": "Report: trained-dynamics Stage-A",
       "path": "reports/trained_dynamics_stage_a_report.md",
-      "sha256": "efc60cdcbfa62dcf97ef63fa37629a14bc44b6ba889da1886dba16c6b46b9d5e"
+      "sha256": "c583ad98c97d3d6dafd2f306cb9aa72982fc7d09315a326edc044a7460036bc5"
     },
     {
       "description": "Report: trained-dynamics planner integration",
@@ -466,12 +512,22 @@
     {
       "description": "Report: CCR score design",
       "path": "reports/ccr_score_design_report.md",
-      "sha256": "fbea55cef6afd4f77a3304fb5261a16ec1ae1de12c9bd37ace4aafe63dec2743"
+      "sha256": "b268a1d382430e56a112bd510aa801b69790b06531870222150c0be169338235"
     },
     {
       "description": "Report: risk model validation",
       "path": "reports/risk_model_validation_report.md",
-      "sha256": "c1faac2590e982baf99c548744bad0b620ddfd3b630ef93806d74990e46e4b89"
+      "sha256": "ced7688fd5ba5acac6a80f6ffbc239cb015895833c9bf535054502a393a33477"
+    },
+    {
+      "description": "Report: calibration label-source ablation",
+      "path": "reports/calibration_label_source_ablation.md",
+      "sha256": "3b7076405d941d0076f751ca67b83fa4262e336df4daba6375c4fab75a45274e"
+    },
+    {
+      "description": "Report: higher-dimensional domain validation",
+      "path": "reports/domain_validation_report.md",
+      "sha256": "44510829a30f048e7af07f401f2a805c373a9a8a13d7f87b640261dea980370a"
     }
   ],
   "theory": [

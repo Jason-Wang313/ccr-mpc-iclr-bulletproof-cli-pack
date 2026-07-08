@@ -37,24 +37,24 @@ Preliminary validation on available calibration-sample logs. These results are f
     },
     {
       "source": "trained_stage_a",
-      "risk_model": "logistic_all_features",
-      "brier": 0.05303133329170463,
-      "roc_auc": 0.9732800203097233,
-      "ece": 0.0358104662324603
+      "risk_model": "random_forest_all_features",
+      "brier": 0.04595054951419268,
+      "roc_auc": 0.9744872187605913,
+      "ece": 0.021763235511367395
     },
     {
       "source": "trained_stage_a",
-      "risk_model": "random_forest_all_features",
-      "brier": 0.0549968529306394,
-      "roc_auc": 0.9696369636963698,
-      "ece": 0.04309502678351593
+      "risk_model": "logistic_all_features",
+      "brier": 0.04843039333423672,
+      "roc_auc": 0.9721245470187971,
+      "ece": 0.026934154716539135
     },
     {
       "source": "trained_stage_a",
       "risk_model": "single_violation_rate",
-      "brier": 0.06458426700349623,
-      "roc_auc": 0.9403274942878903,
-      "ece": 0.06599481612090678
+      "brier": 0.05937567790359488,
+      "roc_auc": 0.9350982219673071,
+      "ece": 0.06292037515605499
     }
   ]
 }

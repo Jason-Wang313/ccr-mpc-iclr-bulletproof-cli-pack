@@ -2,13 +2,13 @@
   "args": {
     "calibration_contexts": 24,
     "candidates": 24,
-    "domains": "synthetic_separation,classic_control",
-    "levels": "L0,L1,L2",
+    "domains": "all",
+    "levels": "L0,L1,L2,L3",
     "methods": "all",
     "seeds": "0,1,2,3,4"
   },
   "code_hash": "de51eb081d2e4ad58ba80c3fc056a98f368a2910a0170426362c3989ac65f966",
-  "created_utc": "2026-07-08T04:15:38.115620+00:00",
+  "created_utc": "2026-07-08T07:47:54.082854+00:00",
   "domains": [
     {
       "action_limit": 1.0,
@@ -51,14 +51,114 @@
       "shift_name": "mass_friction_latency",
       "steps": 20,
       "target": 1.05
+    },
+    {
+      "action_limit": 1.0,
+      "base_bias": 0.0,
+      "base_damping": 0.42,
+      "base_gain": 1.3,
+      "dt": 0.1,
+      "horizon": 8,
+      "init_pos": 0.43,
+      "init_std": 0.05,
+      "init_vel": -0.05,
+      "label": "D2 lateral car surrogate",
+      "mass": 1.0,
+      "name": "dynamic_bicycle_car",
+      "nonlin": 0.08,
+      "planner": "MPPI",
+      "process_noise": 0.005,
+      "safe_limit": 0.48,
+      "shift_name": "friction_steering_bias",
+      "steps": 22,
+      "target": 0.0
+    },
+    {
+      "action_limit": 1.15,
+      "base_bias": 0.0,
+      "base_damping": 0.26,
+      "base_gain": 1.05,
+      "dt": 0.08,
+      "horizon": 8,
+      "init_pos": 0.1,
+      "init_std": 0.04,
+      "init_vel": 0.0,
+      "label": "D3 planar quadrotor altitude surrogate",
+      "mass": 1.0,
+      "name": "planar_quadrotor",
+      "nonlin": 0.01,
+      "planner": "MPPI",
+      "process_noise": 0.006,
+      "safe_limit": 1.05,
+      "shift_name": "wind_payload_latency",
+      "steps": 22,
+      "target": 1.13
+    },
+    {
+      "action_limit": 1.1,
+      "base_bias": 0.0,
+      "base_damping": 0.7,
+      "base_gain": 0.85,
+      "dt": 0.12,
+      "horizon": 7,
+      "init_pos": -0.1,
+      "init_std": 0.04,
+      "init_vel": 0.0,
+      "label": "D4 quasi-static pushing surrogate",
+      "mass": 1.25,
+      "name": "quasistatic_pushing",
+      "nonlin": 0.04,
+      "planner": "MPPI",
+      "process_noise": 0.006,
+      "safe_limit": 0.95,
+      "shift_name": "contact_friction_object_mass",
+      "steps": 20,
+      "target": 1.02
+    },
+    {
+      "action_limit": 1.2,
+      "base_bias": 0.0,
+      "base_damping": 0.18,
+      "base_gain": 1.15,
+      "dt": 0.1,
+      "horizon": 8,
+      "init_pos": -0.2,
+      "init_std": 0.045,
+      "init_vel": 0.0,
+      "label": "D5 CEM-MPC secondary planner",
+      "mass": 1.0,
+      "name": "secondary_planner",
+      "nonlin": 0.02,
+      "planner": "CEM-MPC",
+      "process_noise": 0.004,
+      "safe_limit": 1.0,
+      "shift_name": "secondary_planner_mass_friction",
+      "steps": 20,
+      "target": 1.05
     }
   ],
   "execution_record_type": "trained_dynamics_stage_a",
-  "execution_seconds": 502.83039290001034,
+  "execution_seconds": 2266.8665213000204,
   "model_artifacts": {
     "classic_control": {
       "path": "artifacts/models/classic_control_torch_mlp_ensemble.pt",
       "sha256": "dc578445e9073dd9a7ea9faa16baab05f56d7062b458332408ea716b845379c1"
+    },
+    "dynamic_bicycle_car": {
+      "path": "artifacts/models/dynamic_bicycle_car_torch_mlp_ensemble.pt",
+      "sha256": "55fc3e38561e85f7973081bfc88aaa799fd2baa65739d1d72f8d8b530fd0eb42"
+    },
+    "planar_quadrotor": {
+      "path": "artifacts/models/planar_quadrotor_torch_mlp_ensemble.pt",
+      "sha256": "b856832154fef74f18b1afc14ac5a1a995cfac6c68d69b048865f6f62ed5c503"
+    },
+    "quasistatic_pushing": {
+      "path": "artifacts/models/quasistatic_pushing_torch_mlp_ensemble.pt",
+      "sha256": "d27c70c9f6c332ad2e8661b5a5f20a75398c1b5dfedf16517f3c1fb321343bf9"
+    },
+    "secondary_planner": {
+      "path": "artifacts/models/secondary_planner_torch_mlp_ensemble.pt",
+      "sha256": "4c954dbb547526c09a4b5f417183402235031e1be6975f7df87af5710fe31519"
     },
     "synthetic_separation": {
       "path": "artifacts/models/synthetic_separation_torch_mlp_ensemble.pt",
@@ -70,12 +170,17 @@
     "calibration_contexts": 24,
     "domains": [
       "synthetic_separation",
-      "classic_control"
+      "classic_control",
+      "dynamic_bicycle_car",
+      "planar_quadrotor",
+      "quasistatic_pushing",
+      "secondary_planner"
     ],
     "levels": [
       "L0",
       "L1",
-      "L2"
+      "L2",
+      "L3"
     ],
     "methods": [
       "vanilla_mppi",

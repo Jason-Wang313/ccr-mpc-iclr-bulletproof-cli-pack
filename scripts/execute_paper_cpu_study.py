@@ -115,7 +115,7 @@ METHOD_DISPLAY = {
     "oracle_mpc": "Oracle MPC",
 }
 
-LEVEL_SEVERITY = {"L0": 0.0, "L1": 0.55, "L2": 1.0}
+LEVEL_SEVERITY = {"L0": 0.0, "L1": 0.55, "L2": 1.0, "L3": 1.35}
 TARGET_RISK = 0.15
 
 

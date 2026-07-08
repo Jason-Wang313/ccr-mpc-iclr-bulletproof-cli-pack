@@ -36,7 +36,7 @@ Preliminary design and current implementation audit. The repository has hand-wei
 On available calibration diagnostics, multi-feature learned risk models beat the hand-weighted combined score on Brier score:
 
 - Focused surrogate calibration samples: `random_forest_all_features` Brier 0.0258, versus `single_combined` Brier 0.2071.
-- Trained Stage-A calibration samples: `logistic_all_features` Brier 0.0530, versus `single_combined` Brier 0.2459.
+- Trained Stage-A calibration samples: `random_forest_all_features` Brier 0.0460, versus `single_combined` Brier 0.2344.
 
 This is not a held-out Stage-B claim. It means the max-out path should treat learned risk-model selection as a serious baseline rather than assuming the current hand-weighted CCR score is final.
 
