@@ -194,6 +194,10 @@ ALLOWED_LOG_FILES = {
     "trained_dynamics_stage_a_results.jsonl",
     "trained_dynamics_stage_a_results_flat.csv",
     "trained_dynamics_stage_a_step_predictions.csv",
+    "trained_dynamics_stage_b_pilot_calibration_samples.csv",
+    "trained_dynamics_stage_b_pilot_results.jsonl",
+    "trained_dynamics_stage_b_pilot_results_flat.csv",
+    "trained_dynamics_stage_b_pilot_step_predictions.csv",
 }
 LATEX_SCRATCH_SUFFIXES = (
     ".aux",

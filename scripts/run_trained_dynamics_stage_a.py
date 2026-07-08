@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Run Stage-A CCR-MPC experiments using trained Torch dynamics ensembles.
+"""Run tagged CCR-MPC experiments using trained Torch dynamics ensembles.
 
 The original focused suite uses parameter-particle surrogates. This script is a
 separate evidence path: it loads the trained MLP ensembles from `artifacts/models`
-and uses them inside the planner candidate evaluator for D0/D1 Stage-A runs.
+and uses them inside the planner candidate evaluator for tagged Stage-A or pilot
+runs without overwriting previous evidence streams.
 """
 
 from __future__ import annotations
@@ -70,6 +71,17 @@ def parse_list(value: str, default: Sequence[str]) -> List[str]:
     if value == "all":
         return list(default)
     return [part.strip() for part in value.split(",") if part.strip()]
+
+
+def safe_artifact_tag(value: str) -> str:
+    tag = value.strip()
+    if not tag or any(not (char.isalnum() or char in {"_", "-"}) for char in tag):
+        raise ValueError("artifact tag must contain only letters, numbers, underscores, and hyphens")
+    return tag
+
+
+def tagged_path(kind: str, tag: str, suffix: str) -> str:
+    return f"{kind}/{tag}_{suffix}"
 
 
 def load_trained_bundle(spec: DomainSpec) -> TrainedDynamicsBundle:
@@ -223,6 +235,7 @@ def run_episode_trained(
     num_candidates: int,
     alpha: float,
     code_hash: str,
+    artifact_tag: str,
 ) -> Tuple[Dict[str, object], List[Dict[str, object]]]:
     init_rng = np.random.default_rng(stable_seed("trained_stage_a_init", spec.name, level, seed))
     plan_rng = np.random.default_rng(stable_seed("trained_stage_a_planner", spec.name, level, method, seed))
@@ -330,8 +343,8 @@ def run_episode_trained(
             "prediction_error": float(np.mean(pred_errors)),
         },
         "artifacts": {
-            "config_path": "configs/trained_dynamics_stage_a_config.json",
-            "log_path": "logs/trained_dynamics_stage_a_results.jsonl",
+            "config_path": tagged_path("configs", artifact_tag, "config.json"),
+            "log_path": tagged_path("logs", artifact_tag, "results.jsonl"),
             "plot_paths": [],
             "model_hash": bundle.artifact_hash[:16],
             "code_hash": code_hash,
@@ -368,9 +381,10 @@ def write_reports(df: pd.DataFrame, summary: pd.DataFrame, args: argparse.Namesp
     tables_dir = ROOT / "tables"
     reports_dir.mkdir(exist_ok=True)
     tables_dir.mkdir(exist_ok=True)
-    summary_path = tables_dir / "trained_dynamics_stage_a_summary_by_method.csv"
+    artifact_tag = safe_artifact_tag(args.artifact_tag)
+    summary_path = tables_dir / f"{artifact_tag}_summary_by_method.csv"
     summary.to_csv(summary_path, index=False)
-    domain_path = tables_dir / "trained_dynamics_stage_a_summary_by_domain_method.csv"
+    domain_path = tables_dir / f"{artifact_tag}_summary_by_domain_method.csv"
     df.groupby(["domain", "method"], as_index=False).agg(
         cost_mean=("cost", "mean"),
         violation_rate_mean=("violation_rate", "mean"),
@@ -388,11 +402,11 @@ def write_reports(df: pd.DataFrame, summary: pd.DataFrame, args: argparse.Namesp
         return f"cost={float(r['cost_mean']):.4f}, violation={float(r['violation_rate_mean']):.4f}"
 
     report = [
-        "# Trained-Dynamics Stage-A Report",
+        f"# {artifact_tag.replace('_', ' ').title()} Report",
         "",
         "## Status",
         "",
-        "This Stage-A run uses trained Torch MLP dynamics ensembles inside the planner candidate evaluator for the selected domains.",
+        "This tagged run uses trained Torch MLP dynamics ensembles inside the planner candidate evaluator for the selected domains.",
         "It is a real integration checkpoint, but it is not the final max-out run and does not replace the original focused-suite evidence.",
         "",
         "## Scope",
@@ -414,21 +428,21 @@ def write_reports(df: pd.DataFrame, summary: pd.DataFrame, args: argparse.Namesp
         "",
         "## Artifacts",
         "",
-        "- `logs/trained_dynamics_stage_a_results.jsonl`",
-        "- `logs/trained_dynamics_stage_a_results_flat.csv`",
-        "- `logs/trained_dynamics_stage_a_step_predictions.csv`",
-        "- `tables/trained_dynamics_stage_a_summary_by_method.csv`",
-        "- `tables/trained_dynamics_stage_a_summary_by_domain_method.csv`",
-        "- `configs/trained_dynamics_stage_a_config.json`",
+        f"- `{tagged_path('logs', artifact_tag, 'results.jsonl')}`",
+        f"- `{tagged_path('logs', artifact_tag, 'results_flat.csv')}`",
+        f"- `{tagged_path('logs', artifact_tag, 'step_predictions.csv')}`",
+        f"- `{tagged_path('tables', artifact_tag, 'summary_by_method.csv')}`",
+        f"- `{tagged_path('tables', artifact_tag, 'summary_by_domain_method.csv')}`",
+        f"- `{tagged_path('configs', artifact_tag, 'config.json')}`",
         "",
         "## Limitations",
         "",
-        "- This remains a Stage-A CPU run with the repository's simplified domains; it is not a high-fidelity robot simulation suite.",
+        "- This remains a CPU run with the repository's simplified domains; it is not a high-fidelity robot simulation suite.",
         "- The calibration labels are still simulator candidate labels, not executed-rollout calibration.",
         "- Method names such as `sysid_mpc` and `domain_randomized_mpc` are run through the trained-model candidate evaluator in this integration checkpoint unless the method is `oracle_mpc`; they are not yet full tuned specialized baselines.",
-        "- No strong-superiority claim is allowed from this Stage-A run alone.",
+        "- No strong-superiority claim is allowed from this tagged run alone.",
     ]
-    (reports_dir / "trained_dynamics_stage_a_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (reports_dir / f"{artifact_tag}_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
 
     integration = [
         "# Trained-Dynamics Planner Integration",
@@ -456,11 +470,13 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--seeds", default="0,1,2,3,4")
     parser.add_argument("--candidates", type=int, default=24)
     parser.add_argument("--calibration-contexts", type=int, default=24)
+    parser.add_argument("--artifact-tag", default="trained_dynamics_stage_a")
     return parser.parse_args(argv)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parse_args(argv)
+    artifact_tag = safe_artifact_tag(args.artifact_tag)
     start = time.perf_counter()
     torch.set_num_threads(max(1, min(4, torch.get_num_threads())))
     all_domains = domain_specs()
@@ -519,6 +535,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         args.candidates,
                         TARGET_RISK,
                         code_hash,
+                        artifact_tag,
                     )
                     results.append(result)
                     step_rows.extend(rows)
@@ -529,19 +546,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     configs_dir = ROOT / "configs"
     logs_dir.mkdir(exist_ok=True)
     configs_dir.mkdir(exist_ok=True)
-    write_jsonl(logs_dir / "trained_dynamics_stage_a_results.jsonl", results)
+    write_jsonl(logs_dir / f"{artifact_tag}_results.jsonl", results)
     flat = pd.DataFrame([flatten_result(row) for row in results])
     flat = aggregate_oracle_regret(flat)
-    flat.to_csv(logs_dir / "trained_dynamics_stage_a_results_flat.csv", index=False)
-    pd.DataFrame(step_rows).to_csv(logs_dir / "trained_dynamics_stage_a_step_predictions.csv", index=False)
-    pd.DataFrame(calibration_rows).to_csv(logs_dir / "trained_dynamics_stage_a_calibration_samples.csv", index=False)
+    flat.to_csv(logs_dir / f"{artifact_tag}_results_flat.csv", index=False)
+    pd.DataFrame(step_rows).to_csv(logs_dir / f"{artifact_tag}_step_predictions.csv", index=False)
+    pd.DataFrame(calibration_rows).to_csv(logs_dir / f"{artifact_tag}_calibration_samples.csv", index=False)
     summary = summarize(flat)
     elapsed_s = time.perf_counter() - start
     write_reports(flat, summary, args, elapsed_s)
 
     config = {
         "created_utc": pd.Timestamp.utcnow().isoformat(),
-        "execution_record_type": "trained_dynamics_stage_a",
+        "execution_record_type": artifact_tag,
         "args": vars(args),
         "run_settings": {
             "domains": [spec.name for spec in selected_domains],
@@ -564,8 +581,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         },
         "code_hash": code_hash,
     }
-    (configs_dir / "trained_dynamics_stage_a_config.json").write_text(json.dumps(config, indent=2, sort_keys=True), encoding="utf-8")
-    print(f"wrote trained Stage-A results in {elapsed_s:.2f}s")
+    (configs_dir / f"{artifact_tag}_config.json").write_text(json.dumps(config, indent=2, sort_keys=True), encoding="utf-8")
+    print(f"wrote {artifact_tag} results in {elapsed_s:.2f}s")
     return 0
 
 

@@ -16,6 +16,7 @@ Not final-submission-ready as of 2026-07-08.
 - A calibration-label-source ablation has been generated comparing simulator full-candidate labels with executed-rollout labels.
 - A held-out executed-rollout calibration split has been generated from Stage-A selected rollouts.
 - Higher-dimensional CPU domain prototypes have been added and smoke-validated, but are not integrated into the main MPC result suite.
+- A trained-dynamics Stage-B pilot has been executed on D0-D5, L0-L3, held-out seeds 5-9, 8 key methods, candidate budget 32, and 32 calibration contexts.
 - The current evidence supports a bounded CPU decision-calibration paper, not a strong empirical superiority paper.
 
 ## Passing Evidence Already Present
@@ -32,7 +33,7 @@ Not final-submission-ready as of 2026-07-08.
 - Trained learned-dynamics ensembles are integrated into a separate Stage-A runner, but not yet into the original focused-suite runner as a first-class `--model-source` option.
 - Theorem-specific reports A/B/C are present, but theorem D is not implemented and A/B/C still require human theorem review.
 - Higher-dimensional CPU domain prototypes are present and smoke-validated, but not integrated into the main MPC runner or Stage-A trained-dynamics experiments.
-- Expanded Stage-A trained-dynamics artifacts are present; Stage B and Stage C max-out execution artifacts are not.
+- Expanded Stage-A trained-dynamics artifacts and a Stage-B pilot are present; full Stage B and Stage C max-out execution artifacts are not.
 - The acceptance-critical result gate exists and currently rejects a broad superiority claim.
 - Preliminary baseline sweep configuration and tuning summary exist, but validation-selected sweeps have not been executed.
 - Learned risk models are validated diagnostically, but not yet integrated into the planner or tested on held-out Stage B/C runs.
@@ -46,6 +47,7 @@ Allowed:
 - Prediction-space uncertainty is an incomplete proxy for control risk in the current bounded suite.
 - CCR-MPC improves violation rate over vanilla MPPI and uncalibrated CCR in the focused run.
 - CCR-MPC improves violation rate over vanilla MPPI and uncalibrated CCR in trained-dynamics Stage A.
+- CCR-MPC improves violation rate over vanilla MPPI and uncalibrated CCR in the trained-dynamics Stage-B pilot.
 - CCR-MPC ties the lowest aggregate violation rate tier in the focused run.
 - The current evidence is CPU-reproducible and bounded.
 
@@ -59,4 +61,4 @@ Not allowed:
 
 ## Next Required Step
 
-Integrate the higher-dimensional domain prototypes into the planner suite, add a fresh Stage-B executed-rollout calibration/test split, integrate learned risk models into the planner, and execute validation-selected baseline sweeps before strengthening the paper. Expanded Stage-A results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal, violation-tail, and robust baselines remain stronger on some aggregate safety metrics.
+Integrate the higher-dimensional domain prototypes into the planner suite, add a fresh Stage-B executed-rollout calibration/test split, integrate learned risk models into the planner, and execute validation-selected baseline sweeps before strengthening the paper. Expanded Stage-A and Stage-B pilot results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal, oracle, violation-tail, and robust/CVaR-style baselines remain stronger on some aggregate safety or cost metrics.

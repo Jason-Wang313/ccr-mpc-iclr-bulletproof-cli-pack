@@ -10,6 +10,7 @@ Current gate result: do not claim broad empirical superiority.
 - `tables/trained_dynamics_stage_a_summary_by_method.csv`
 - `reports/experiment_results_summary.md`
 - `reports/trained_dynamics_stage_a_report.md`
+- `reports/trained_dynamics_stage_b_pilot_report.md`
 - `paper/iclr_submission.tex`
 - `reports/preupgrade_repo_audit.md`
 
@@ -20,6 +21,8 @@ Current gate result: do not claim broad empirical superiority.
 - CCR-MPC has much lower mean cost than highly conservative fallbacks such as `soda_like_fallback` and `violation_tail_only`.
 - In trained-dynamics Stage A on D0-D5 with L0-L3, CCR-MPC improves aggregate violation over vanilla MPPI: 0.0165741 versus 0.0254798.
 - In trained-dynamics Stage A, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0165741 versus 0.0259049.
+- In the trained-dynamics Stage-B pilot, CCR-MPC improves aggregate violation over vanilla MPPI: 0.0113636 versus 0.0198611.
+- In the trained-dynamics Stage-B pilot, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0113636 versus 0.0154419.
 - The executed-rollout calibration split keeps validation-selected held-out accepted step-violation rates below 0.05 on average for all tested alpha values.
 
 ## Where CCR-MPC Ties
@@ -35,6 +38,8 @@ Current gate result: do not claim broad empirical superiority.
 - In trained-dynamics Stage A, `conformal_prediction_mpc`, `conformal_risk_non_ccr`, and `violation_tail_only` achieve lower aggregate violation than CCR-MPC at higher cost/freezing.
 - In trained-dynamics Stage A, `robust_mpc` has lower cost and slightly lower aggregate violation than CCR-MPC.
 - In trained-dynamics Stage A, the `domain_randomized_mpc` row is lower cost but slightly higher violation than CCR-MPC; it is not yet a fully faithful domain-randomized learned-model baseline.
+- In the trained-dynamics Stage-B pilot, `conformal_prediction_mpc`, `conformal_risk_non_ccr`, and `oracle_mpc` have lower aggregate violation than CCR-MPC.
+- In the trained-dynamics Stage-B pilot, `cvar_ra_mppi` and `robust_mpc` have lower mean cost than CCR-MPC with only slightly higher violation.
 - The executed-rollout calibration split still has high accepted plan-failure rates, averaging roughly 0.22-0.24 across alpha settings.
 
 ## Allowed Paper Claim

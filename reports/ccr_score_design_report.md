@@ -27,6 +27,7 @@ Preliminary design and current implementation audit. The repository has hand-wei
 
 - Original focused surrogate suite: `tables/summary_by_method.csv`
 - Trained-dynamics Stage A: `tables/trained_dynamics_stage_a_summary_by_method.csv`
+- Trained-dynamics Stage-B pilot: `tables/trained_dynamics_stage_b_pilot_summary_by_method.csv`
 - Reliability plot: `figures/risk_reliability.png`
 - Dynamics calibration diagnostic: `figures/prediction_calibration_vs_control_risk.png`
 - Preliminary risk-model validation: `logs/risk_model_validation.csv`
@@ -46,6 +47,10 @@ This is not a held-out Stage-B claim. It means the max-out path should treat lea
 On the Stage-A selected-rollout split, validation-selected held-out score choices most often select `violation_tail` (35 of 76 selected rows), followed by `combined` (19), `regret_cvar` (12), `pred_risk` (5), and `pred_violation_rate` (5). Held-out accepted step-violation rates average 0.0146 at alpha 0.05 and 0.0201 at alpha 0.10/0.15/0.20, but accepted plan-failure rates remain high at roughly 0.22-0.24.
 
 This supports validation selection over a fixed hand-weighted score and warns against claiming episode-level safety from step-level executed-rollout calibration.
+
+## Stage-B Pilot Finding
+
+In the held-out trained-dynamics Stage-B pilot, CCR-MPC improves violation over vanilla MPPI and uncalibrated CCR, but `conformal_prediction_mpc` and `conformal_risk_non_ccr` are safer at higher cost, while CVaR/RA-MPPI and robust MPC are lower cost with slightly higher violation. This reinforces the need for validation-selected learned risk models and tuned baseline sweeps before final paper claims.
 
 ## Missing For Max-Out
 

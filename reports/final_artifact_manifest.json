@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "f37a184acc91e527c6ba70fd12ad0132331c71d46ff1ee132476522584e06334"
+      "sha256": "eff08cff1426ef9e9a64edffa258aa5e72d5e094ab0b808813a8299b024c5edf"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -57,9 +57,9 @@
       "sha256": "a9139be9b57a79b9180902f37edab90b7d0edac458f51d71e999b6698165a2a4"
     },
     {
-      "description": "Trained-dynamics Stage-A runner",
+      "description": "Tagged trained-dynamics runner",
       "path": "scripts/run_trained_dynamics_stage_a.py",
-      "sha256": "76c47eeee913ac25b569f681571f76dd2e6225db6dfe8f1affe545723931bc86"
+      "sha256": "a9fe45133277a5f97c85fab7126042cccd86031e52f6acc6c05434d683d69cbd"
     },
     {
       "description": "Risk model validation script",
@@ -239,6 +239,41 @@
       "description": "Executed-rollout calibration validation-selected held-out rows",
       "path": "tables/executed_rollout_calibration_selection.csv",
       "sha256": "81d041fb39dce8b2302ae7a636a6227a08c4a84811347d36deec90f13878f443"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot execution config",
+      "path": "configs/trained_dynamics_stage_b_pilot_config.json",
+      "sha256": "c2fbff945ea5e681d1817c20db426ba53b27a91fed64949a623e31f2ce9f43f6"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot result log",
+      "path": "logs/trained_dynamics_stage_b_pilot_results.jsonl",
+      "sha256": "3e2a260a138ed834f39afe1cd92a6bdb9c85c9fc8fa61142761cbf49720e2ae7"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot flat results",
+      "path": "logs/trained_dynamics_stage_b_pilot_results_flat.csv",
+      "sha256": "2958b20bc1539f0fc7466130de8309aa013cb0764eceb38680e8097ac576f094"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot step predictions",
+      "path": "logs/trained_dynamics_stage_b_pilot_step_predictions.csv",
+      "sha256": "a609d96aa6a35a37a089c6f346b830d029a18962171907e6709c8f6fc2182868"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot calibration samples",
+      "path": "logs/trained_dynamics_stage_b_pilot_calibration_samples.csv",
+      "sha256": "35118621d5be51d34fe92aafd044a2707f8a88f5319896b7afcb3bd14336caae"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot method summary",
+      "path": "tables/trained_dynamics_stage_b_pilot_summary_by_method.csv",
+      "sha256": "afd50c65d8f124461f059d2c273b5f95785a1f623e8142bef66662e721f94687"
+    },
+    {
+      "description": "Trained-dynamics Stage-B pilot domain-method summary",
+      "path": "tables/trained_dynamics_stage_b_pilot_summary_by_domain_method.csv",
+      "sha256": "73eb3b9e5a8c5caf0feb8536264e480e6d1f33186b074a97b3b0b488bf1a79aa"
     }
   ],
   "git_commit": "not-a-git-repository",
@@ -252,7 +287,9 @@
     "The expanded trained-dynamics Stage-A run covers D0-D5, L0-L3, seeds 0-4, and candidate budget 24; it is not a Stage-B/Stage-C max-out run.",
     "Preliminary learned risk-model validation is diagnostic only and is not yet integrated into held-out planner results.",
     "Calibration label-source ablation is offline from Stage-A logs and does not replace a dedicated executed-rollout calibration split.",
-    "The Stage-A executed-rollout calibration split controls held-out step-level violations in this diagnostic but has high accepted plan-failure rates and is not a fresh Stage-B split."
+    "The Stage-A executed-rollout calibration split controls held-out step-level violations in this diagnostic but has high accepted plan-failure rates and is not a fresh Stage-B split.",
+    "The trained-dynamics Stage-B pilot covers only eight key methods, one candidate budget, one calibration-context budget, and held-out seeds 5-9; it is not the full Stage-B matrix.",
+    "The Stage-B pilot again shows mixed results: CCR-MPC improves over vanilla and uncalibrated CCR, but conformal/oracle rows are safer and CVaR/robust rows can be lower cost."
   ],
   "paper": [
     {
@@ -363,12 +400,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "392236765711f3d342a098189ee6131740d75664433b6fc76348b78f8370d208"
+      "sha256": "11847e2c29a5fa524f8e2a0370d95a86f65190a0889ca40ec0c17ed2decd0e5c"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "c821373c8e4c7017de7e5067f59a83b77586b58bd98fcff39f8591f18e33d515"
+      "sha256": "32af7a6151d9bf5f3bf13234e601b5b78042c846295b7410ed96cd72d6ead81e"
     },
     {
       "description": "Report: theorem A separation",
@@ -393,7 +430,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "45f8d0451c9008941b3e66d941218dc999f57a014f7aa37ce3f58d957e1b41c9"
+      "sha256": "9fe5e644fa4afb52d4c920fcd564ae8900b5cdc34e145bd23066101dd524d842"
     },
     {
       "description": "Report: theory_moat_report",
@@ -508,7 +545,7 @@
     {
       "description": "Codex handoff",
       "path": "docs/CODEX_HANDOFF.md",
-      "sha256": "2b8eda31a3624d51dcdf12dcd7ce3a4911b1c2d90116e5ecf3b12ae53e91d7bd"
+      "sha256": "735c2dbea20350a8d91106d870a3872a3e28fb407e77331346b20973af3f58e8"
     },
     {
       "description": "Report: trained-dynamics Stage-A",
@@ -523,12 +560,12 @@
     {
       "description": "Report: baseline fairness",
       "path": "reports/baseline_fairness_report.md",
-      "sha256": "34354d84c0222d60537e038dbc9234e57a7cae670c504005fc2a257d054fd70a"
+      "sha256": "4523e27f85bd6947862f7883c2e911eb08cb97b11bb02d32981bd14354631c65"
     },
     {
       "description": "Report: CCR score design",
       "path": "reports/ccr_score_design_report.md",
-      "sha256": "dfaaf36c7f16eafafd24a498a7afc19b8cfd4fc50ca85cfbd42e02ab40371a5f"
+      "sha256": "8613a428e07711b7fdaee751c615edb8238558329cc591cb297f7432f922b790"
     },
     {
       "description": "Report: risk model validation",
@@ -549,6 +586,11 @@
       "description": "Report: executed-rollout calibration split",
       "path": "reports/executed_rollout_calibration_split.md",
       "sha256": "4c5a37a403a3fbcbe78a45646aa8490195093c4e56a431f19ed5e3ba006207dd"
+    },
+    {
+      "description": "Report: trained-dynamics Stage-B pilot",
+      "path": "reports/trained_dynamics_stage_b_pilot_report.md",
+      "sha256": "a23680eb59bffd2646658810fba5f3532f46dd279e18e7cd4c15121499cb54d2"
     }
   ],
   "theory": [
