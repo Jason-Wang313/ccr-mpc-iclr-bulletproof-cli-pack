@@ -11,7 +11,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - Baseline before edits was up to date with `origin/main`.
 - Existing focused CPU suite remains 1026 closed-loop runs and 20862 planning-step predictions.
 - Existing verifier now passes after this continuation checkpoint: `PACK VERIFY PASSED: 0 warning(s)`.
-- Manifest now verifies 102 artifact entries.
+- Manifest now verifies 106 artifact entries.
 - New `paper/iclr_submission.tex` and `paper/iclr_submission.pdf` are seeded from the bounded manuscript, not a final max-out rewrite.
 - New trained dynamics artifacts are diagnostic in the original focused suite and integrated in the separate Stage-A runner `scripts/run_trained_dynamics_stage_a.py`.
 
@@ -53,6 +53,11 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - `scripts/compare_calibration_label_sources.py`
   - `logs/calibration_label_source_ablation.csv`
   - `reports/calibration_label_source_ablation.md`
+- Added executed-rollout calibration split:
+  - `scripts/evaluate_executed_rollout_calibration_split.py`
+  - `logs/executed_rollout_calibration_split.csv`
+  - `tables/executed_rollout_calibration_selection.csv`
+  - `reports/executed_rollout_calibration_split.md`
 - Added higher-dimensional domain prototypes and validation:
   - `src/domains/high_dimensional.py`
   - `scripts/validate_domain_upgrades.py`
@@ -79,6 +84,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - `python scripts\run_trained_dynamics_stage_a.py --domains all --levels L0,L1,L2,L3 --seeds 0,1,2,3,4 --candidates 24 --calibration-contexts 24`: completed 2280 trained-dynamics Stage-A episodes in 2266.87 seconds.
 - `python scripts\validate_risk_models.py`: wrote 18 risk-model validation rows.
 - `python scripts\compare_calibration_label_sources.py`: wrote 27 calibration-label-source ablation rows.
+- `python scripts\evaluate_executed_rollout_calibration_split.py`: wrote 1596 split evaluation rows and 76 validation-selected held-out rows.
 - `python scripts\validate_domain_upgrades.py`: wrote domain validation metrics and four domain schematic figures.
 - Final `python scripts\verify_pack.py --smoke`: `PACK VERIFY PASSED: 0 warning(s)`.
 
@@ -104,6 +110,13 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - Calibration-label-source ablation:
   - Simulator full-candidate violation-rate label Brier: 0.0541
   - Executed-rollout step-violation label Brier: 0.1578
+- Executed-rollout calibration split:
+  - Alpha 0.05 held-out selected mean accept rate: 0.9811
+  - Alpha 0.05 held-out accepted step-violation rate: 0.0146
+  - Alpha 0.05 held-out accepted plan-failure rate: 0.2211
+  - Alpha 0.10/0.15/0.20 held-out accepted step-violation rate: 0.0201
+  - Alpha 0.10/0.15/0.20 held-out accepted plan-failure rate: 0.2378
+  - Most selected score: `violation_tail` with 35 of 76 selected rows.
 - Higher-dimensional domain prototype smoke validation:
   - Cartpole safety: violation rate 1.0000 at L0-L3 under the simple validation policy, so it needs controller/domain tuning before main experiments.
   - Dynamic bicycle 4D: violation rate 0.0000 at L0-L3, likely too easy in this smoke policy.
@@ -117,6 +130,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - The max-out prompt is not complete. The final max-out completion message has not been printed and must not be printed yet.
 - Trained Stage-A results are mixed and do not support broad superiority.
 - Higher-dimensional domains are prototypes only; they are not integrated into the main MPC runner or trained Stage-A runner.
+- The executed-rollout calibration split supports step-level diagnostics only; accepted plan-failure rates remain too high for an episode-level guarantee.
 
 ## Open Questions
 
@@ -128,7 +142,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 
 1. Commit and push this verified continuation checkpoint.
 2. Promote trained dynamics to a first-class `--model-source` option in the original runner, or keep the separate runner and integrate the higher-dimensional domain prototypes there.
-3. Add a dedicated executed-rollout calibration split instead of relying only on offline Stage-A diagnostics.
+3. Run a fresh Stage-B calibration/test split after planner/domain integration; do not rely only on the Stage-A split.
 4. Execute validation-selected baseline sweeps from `configs/baseline_sweeps.yaml`.
 5. Run Stage B only after trained-domain baselines, domain difficulty, and calibration are stable.
 

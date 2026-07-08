@@ -7,7 +7,7 @@ Preliminary. The focused surrogate suite and trained-dynamics Stage-A suite incl
 ## What Is Matched
 
 - Within the original focused suite, all methods share the configured domain/OOD/seed grid and candidate budget unless method-specific oracle, system-ID proxy, or domain-randomized particles are part of the method definition.
-- Within trained-dynamics Stage A, all non-oracle methods use the same trained Torch MLP ensemble candidate evaluator on D0/D1, levels L0-L2, seeds 0-4, 24 candidates, and 24 calibration contexts per domain/level.
+- Within trained-dynamics Stage A, all non-oracle methods use the same trained Torch MLP ensemble candidate evaluator on D0-D5, levels L0-L3, seeds 0-4, 24 candidates, and 24 calibration contexts per domain/level.
 - `oracle_mpc` uses the true simulator candidate evaluator in both suites and is reported as an oracle reference, not a fair deployable baseline.
 
 ## What Is Not Yet Fair Enough For Final Claims
@@ -26,4 +26,3 @@ Preliminary. The focused surrogate suite and trained-dynamics Stage-A suite incl
 ## Final-Submission Requirement
 
 Before claiming superiority, execute validation-selected sweeps under matched budgets, then freeze hyperparameters before the held-out Stage B/Stage C test runs.
-

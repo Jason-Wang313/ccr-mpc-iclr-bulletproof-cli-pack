@@ -185,6 +185,7 @@ ALLOWED_LOG_FILES = {
     "calibration_label_source_ablation.csv",
     "dynamics_prediction_metrics.csv",
     "domain_validation_metrics.csv",
+    "executed_rollout_calibration_split.csv",
     "results.jsonl",
     "results_flat.csv",
     "risk_model_validation.csv",

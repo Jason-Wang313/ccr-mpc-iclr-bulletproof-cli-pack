@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "9c92f301016211080cb3a9a52dcca26b5751637336c80ee4b8a0817a7cca4067"
+      "sha256": "f37a184acc91e527c6ba70fd12ad0132331c71d46ff1ee132476522584e06334"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -80,6 +80,11 @@
       "description": "Higher-dimensional CPU domain prototypes",
       "path": "src/domains/high_dimensional.py",
       "sha256": "f3598b981fcc96588a39b2521016a7d412f46c84dace6ef9649ea4418b0c15c9"
+    },
+    {
+      "description": "Executed-rollout calibration split evaluator",
+      "path": "scripts/evaluate_executed_rollout_calibration_split.py",
+      "sha256": "edf46dcc7dbb21197525c3b700c31074d5f41e2d6a91591f4fe1a41bf4be5ed2"
     }
   ],
   "completion_message": "ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms, calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript, related-work audit, and reviewer-defense reports are finished. All claims are backed by generated artifacts. Human review is required before submission.",
@@ -224,6 +229,16 @@
       "description": "Higher-dimensional domain validation metrics",
       "path": "logs/domain_validation_metrics.csv",
       "sha256": "a5b09f108a65bc72f81e69484458393fbe764a876574535212e8207c77121152"
+    },
+    {
+      "description": "Executed-rollout calibration split metrics",
+      "path": "logs/executed_rollout_calibration_split.csv",
+      "sha256": "95a0d9611a17d65b6f5b9c2fb09156ca4419bc522671dc1c1847e0fcb69227d8"
+    },
+    {
+      "description": "Executed-rollout calibration validation-selected held-out rows",
+      "path": "tables/executed_rollout_calibration_selection.csv",
+      "sha256": "81d041fb39dce8b2302ae7a636a6227a08c4a84811347d36deec90f13878f443"
     }
   ],
   "git_commit": "not-a-git-repository",
@@ -236,7 +251,8 @@
     "The trained dynamics artifacts are diagnostic and integrated only in the separate Stage-A runner, not the original focused-suite runner.",
     "The expanded trained-dynamics Stage-A run covers D0-D5, L0-L3, seeds 0-4, and candidate budget 24; it is not a Stage-B/Stage-C max-out run.",
     "Preliminary learned risk-model validation is diagnostic only and is not yet integrated into held-out planner results.",
-    "Calibration label-source ablation is offline from Stage-A logs and does not replace a dedicated executed-rollout calibration split."
+    "Calibration label-source ablation is offline from Stage-A logs and does not replace a dedicated executed-rollout calibration split.",
+    "The Stage-A executed-rollout calibration split controls held-out step-level violations in this diagnostic but has high accepted plan-failure rates and is not a fresh Stage-B split."
   ],
   "paper": [
     {
@@ -347,12 +363,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "47302819603b10b7808a9d896f2d45e4a42d975a3df85e61cfee8e834a01357f"
+      "sha256": "392236765711f3d342a098189ee6131740d75664433b6fc76348b78f8370d208"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "33f89dab4aab268a23ec688058a18e0f6fbfc41d11f28b1d17123dd33692bbce"
+      "sha256": "c821373c8e4c7017de7e5067f59a83b77586b58bd98fcff39f8591f18e33d515"
     },
     {
       "description": "Report: theorem A separation",
@@ -377,7 +393,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "a270d2dfcfd65fd8e4159bd9fafa20201b6047952d0167945828efa9eb0a580c"
+      "sha256": "45f8d0451c9008941b3e66d941218dc999f57a014f7aa37ce3f58d957e1b41c9"
     },
     {
       "description": "Report: theory_moat_report",
@@ -397,7 +413,7 @@
     {
       "description": "Report: calibration_report",
       "path": "reports/calibration_report.md",
-      "sha256": "3ce91d0fa8b8d6d49f87164618bb05f7ba9831dbfeb115d7ee43eea43b86efa4"
+      "sha256": "fd372a0a2f4622cfd27eae9faad80a57b72c38f4811bc539d5e29a559375ead9"
     },
     {
       "description": "Report: reviewer_attack_closure_report",
@@ -492,7 +508,7 @@
     {
       "description": "Codex handoff",
       "path": "docs/CODEX_HANDOFF.md",
-      "sha256": "ba937e575de7438257350513485a8f1628bd6ce04c2b8afa6e6d031613f4f40f"
+      "sha256": "2b8eda31a3624d51dcdf12dcd7ce3a4911b1c2d90116e5ecf3b12ae53e91d7bd"
     },
     {
       "description": "Report: trained-dynamics Stage-A",
@@ -507,12 +523,12 @@
     {
       "description": "Report: baseline fairness",
       "path": "reports/baseline_fairness_report.md",
-      "sha256": "a912bad1d97e8ce1b031f34e6f70879c7b4fe0c394a714a83e8aa77cb9dbe742"
+      "sha256": "34354d84c0222d60537e038dbc9234e57a7cae670c504005fc2a257d054fd70a"
     },
     {
       "description": "Report: CCR score design",
       "path": "reports/ccr_score_design_report.md",
-      "sha256": "b268a1d382430e56a112bd510aa801b69790b06531870222150c0be169338235"
+      "sha256": "dfaaf36c7f16eafafd24a498a7afc19b8cfd4fc50ca85cfbd42e02ab40371a5f"
     },
     {
       "description": "Report: risk model validation",
@@ -528,6 +544,11 @@
       "description": "Report: higher-dimensional domain validation",
       "path": "reports/domain_validation_report.md",
       "sha256": "44510829a30f048e7af07f401f2a805c373a9a8a13d7f87b640261dea980370a"
+    },
+    {
+      "description": "Report: executed-rollout calibration split",
+      "path": "reports/executed_rollout_calibration_split.md",
+      "sha256": "4c5a37a403a3fbcbe78a45646aa8490195093c4e56a431f19ed5e3ba006207dd"
     }
   ],
   "theory": [

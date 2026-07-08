@@ -130,6 +130,10 @@ At the start of this execution, the local repo did not contain verified artifact
 - `scripts/compare_calibration_label_sources.py`
 - `logs/calibration_label_source_ablation.csv`
 - `reports/calibration_label_source_ablation.md`
+- `scripts/evaluate_executed_rollout_calibration_split.py`
+- `logs/executed_rollout_calibration_split.csv`
+- `tables/executed_rollout_calibration_selection.csv`
+- `reports/executed_rollout_calibration_split.md`
 - `src/domains/high_dimensional.py`
 - `scripts/validate_domain_upgrades.py`
 - `logs/domain_validation_metrics.csv`
@@ -147,7 +151,7 @@ At the start of this execution, the local repo did not contain verified artifact
 - Higher-dimensional CPU domain prototypes now exist and pass smoke validation, but they are not integrated into the main MPC result suite or trained Stage-A experiments.
 - Risk-estimator validation exists as a preliminary calibration diagnostic, but learned risk models are not yet integrated into the planner.
 - Full validation-selected baseline sweeps remain missing.
-- A calibration-label source ablation exists, but a dedicated executed-rollout calibration split before held-out testing remains missing.
+- A Stage-A executed-rollout calibration split exists, but a fresh pre-registered Stage-B calibration/test split remains missing.
 - Full Stage B or Stage C max-out execution remains missing.
 - `paper/iclr_submission.tex` remains a seeded bounded manuscript rather than a rewritten max-out submission.
 
@@ -166,4 +170,4 @@ At the start of this execution, the local repo did not contain verified artifact
 
 ## Current Phase-0 Decision
 
-The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic, Stage-A trained-dynamics, and higher-dimensional domain-prototype artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until broader trained-dynamics integration, main-runner domain integration, executed-rollout calibration, validation-selected baseline sweeps, max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.
+The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic, Stage-A trained-dynamics, executed-rollout calibration-split, and higher-dimensional domain-prototype artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until broader trained-dynamics integration, main-runner domain integration, fresh Stage-B calibration, validation-selected baseline sweeps, max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.

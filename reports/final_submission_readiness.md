@@ -14,6 +14,7 @@ Not final-submission-ready as of 2026-07-08.
 - Trained-dynamics Stage A has been executed on D0-D5 with all 19 methods, L0-L3, and seeds 0-4.
 - Preliminary risk-model validation has been generated for single-feature, logistic, isotonic, and random-forest score models.
 - A calibration-label-source ablation has been generated comparing simulator full-candidate labels with executed-rollout labels.
+- A held-out executed-rollout calibration split has been generated from Stage-A selected rollouts.
 - Higher-dimensional CPU domain prototypes have been added and smoke-validated, but are not integrated into the main MPC result suite.
 - The current evidence supports a bounded CPU decision-calibration paper, not a strong empirical superiority paper.
 
@@ -36,7 +37,7 @@ Not final-submission-ready as of 2026-07-08.
 - Preliminary baseline sweep configuration and tuning summary exist, but validation-selected sweeps have not been executed.
 - Learned risk models are validated diagnostically, but not yet integrated into the planner or tested on held-out Stage B/C runs.
 - No final citation re-audit has been performed for the max-out manuscript.
-- The verifier permits the new tracked diagnostic logs and manifest-hashes the new artifacts, but it does not yet require Stage B/Stage C max-out coverage.
+- The verifier permits the new tracked diagnostic logs and manifest-hashes the new artifacts, but it does not yet require Stage B/Stage C max-out coverage or fresh held-out calibration splits.
 
 ## Claim Posture Allowed Right Now
 
@@ -58,4 +59,4 @@ Not allowed:
 
 ## Next Required Step
 
-Integrate the higher-dimensional domain prototypes into the planner suite, add a dedicated executed-rollout calibration split, integrate learned risk models into the planner, and execute validation-selected baseline sweeps before strengthening the paper. Expanded Stage-A results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal, violation-tail, and robust baselines remain stronger on some aggregate safety metrics.
+Integrate the higher-dimensional domain prototypes into the planner suite, add a fresh Stage-B executed-rollout calibration/test split, integrate learned risk models into the planner, and execute validation-selected baseline sweeps before strengthening the paper. Expanded Stage-A results are mixed: CCR-MPC improves over vanilla/uncalibrated CCR, but conformal, violation-tail, and robust baselines remain stronger on some aggregate safety metrics.

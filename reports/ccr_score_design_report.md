@@ -30,6 +30,7 @@ Preliminary design and current implementation audit. The repository has hand-wei
 - Reliability plot: `figures/risk_reliability.png`
 - Dynamics calibration diagnostic: `figures/prediction_calibration_vs_control_risk.png`
 - Preliminary risk-model validation: `logs/risk_model_validation.csv`
+- Executed-rollout calibration split: `logs/executed_rollout_calibration_split.csv`
 
 ## Preliminary Risk-Model Finding
 
@@ -39,6 +40,12 @@ On available calibration diagnostics, multi-feature learned risk models beat the
 - Trained Stage-A calibration samples: `random_forest_all_features` Brier 0.0460, versus `single_combined` Brier 0.2344.
 
 This is not a held-out Stage-B claim. It means the max-out path should treat learned risk-model selection as a serious baseline rather than assuming the current hand-weighted CCR score is final.
+
+## Executed-Rollout Split Finding
+
+On the Stage-A selected-rollout split, validation-selected held-out score choices most often select `violation_tail` (35 of 76 selected rows), followed by `combined` (19), `regret_cvar` (12), `pred_risk` (5), and `pred_violation_rate` (5). Held-out accepted step-violation rates average 0.0146 at alpha 0.05 and 0.0201 at alpha 0.10/0.15/0.20, but accepted plan-failure rates remain high at roughly 0.22-0.24.
+
+This supports validation selection over a fixed hand-weighted score and warns against claiming episode-level safety from step-level executed-rollout calibration.
 
 ## Missing For Max-Out
 
