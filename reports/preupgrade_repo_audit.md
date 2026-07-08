@@ -110,17 +110,32 @@ At the start of this execution, the local repo did not contain verified artifact
 - `reports/dynamics_training_report.md`
 - `figures/prediction_calibration_vs_control_risk.png`
 - `figures/theorem_separation_visualization.png`
+- `scripts/run_trained_dynamics_stage_a.py`
+- `logs/trained_dynamics_stage_a_results.jsonl`
+- `logs/trained_dynamics_stage_a_results_flat.csv`
+- `logs/trained_dynamics_stage_a_step_predictions.csv`
+- `logs/trained_dynamics_stage_a_calibration_samples.csv`
+- `configs/trained_dynamics_stage_a_config.json`
+- `tables/trained_dynamics_stage_a_summary_by_method.csv`
+- `tables/trained_dynamics_stage_a_summary_by_domain_method.csv`
+- `reports/trained_dynamics_stage_a_report.md`
+- `reports/trained_dynamics_planner_integration.md`
+- `configs/baseline_sweeps.yaml`
+- `tables/baseline_tuning_summary.csv`
+- `reports/baseline_fairness_report.md`
+- `reports/ccr_score_design_report.md`
+- `scripts/validate_risk_models.py`
+- `logs/risk_model_validation.csv`
+- `reports/risk_model_validation_report.md`
 
 ## Still Missing After This Execution
 
-- Trained learned-dynamics ensembles are not yet integrated into the MPC experiment runner.
+- Trained learned-dynamics ensembles are integrated into a separate Stage-A runner, but not yet into the original focused-suite runner as a first-class model-source option.
 - The theorem-specific reports still require human theorem review.
 - No optional theorem D weighted/adaptive shift-calibration proof or experiment has been implemented.
 - Higher-fidelity 4D dynamic bicycle, 6D planar quadrotor, and richer contact-pushing domains remain missing.
-- Risk-estimator validation table `logs/risk_model_validation.csv` remains missing.
-- `reports/ccr_score_design_report.md` remains missing.
-- `configs/baseline_sweeps.yaml` remains missing.
-- `tables/baseline_tuning_summary.csv` remains missing.
+- Risk-estimator validation exists as a preliminary calibration diagnostic, but learned risk models are not yet integrated into the planner.
+- Full validation-selected baseline sweeps remain missing.
 - Full Stage B or Stage C max-out execution remains missing.
 - `paper/iclr_submission.tex` remains a seeded bounded manuscript rather than a rewritten max-out submission.
 
@@ -139,4 +154,4 @@ At the start of this execution, the local repo did not contain verified artifact
 
 ## Current Phase-0 Decision
 
-The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until trained dynamics are integrated into the planner, stronger domains, max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.
+The repository is clean and verified as a bounded CPU package plus new Phase-1/Phase-2 diagnostic and Stage-A trained-dynamics artifacts. It is not yet a max-out ICLR submission package. The final completion message from `FINAL_AGENT_PROMPT_CCR_MPC_ICLR_MAXOUT.md` must not be printed until broader trained-dynamics integration, stronger domains, executed-rollout calibration, validation-selected baseline sweeps, max-out experiment artifacts, citation audit, claim ledger, final PDF, and an updated verifier all pass.

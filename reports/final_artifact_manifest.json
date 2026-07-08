@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "d7a51394c3569cf002bff8e2dc64e14ff88e5478a2552a1a5b186dc3770b0614"
+      "sha256": "5ae3700bb68f621871c48da1f198512f657b7096416ce8fd40e187753ca66371"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -55,6 +55,16 @@
       "description": "Artifact manifest JSON schema",
       "path": "schemas/artifact_manifest_schema.json",
       "sha256": "a9139be9b57a79b9180902f37edab90b7d0edac458f51d71e999b6698165a2a4"
+    },
+    {
+      "description": "Trained-dynamics Stage-A runner",
+      "path": "scripts/run_trained_dynamics_stage_a.py",
+      "sha256": "de51eb081d2e4ad58ba80c3fc056a98f368a2910a0170426362c3989ac65f966"
+    },
+    {
+      "description": "Risk model validation script",
+      "path": "scripts/validate_risk_models.py",
+      "sha256": "d31689349bde1f1409328493638497ec1eeb6ad347d77c45086120f410f5fb96"
     }
   ],
   "completion_message": "ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms, calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript, related-work audit, and reviewer-defense reports are finished. All claims are backed by generated artifacts. Human review is required before submission.",
@@ -139,6 +149,56 @@
       "description": "Generated result table",
       "path": "tables/main_results_table_rows.tex",
       "sha256": "30c87330f1d228f67666458f9f968bc8c08776e3a7f5f40abcdd7f59c7d6001d"
+    },
+    {
+      "description": "Trained-dynamics Stage-A execution config",
+      "path": "configs/trained_dynamics_stage_a_config.json",
+      "sha256": "c9b19ea08bb8455d6801fa662412079a6303d890b39c8b425854f2ccef00ed13"
+    },
+    {
+      "description": "Preliminary baseline sweep plan",
+      "path": "configs/baseline_sweeps.yaml",
+      "sha256": "21aa93e7d6673521378f3b9cb8065aa2927d6815d6e15368c5b62a1a5f1a97c0"
+    },
+    {
+      "description": "Trained-dynamics Stage-A result log",
+      "path": "logs/trained_dynamics_stage_a_results.jsonl",
+      "sha256": "4c7e1e4291bf41d9a2353c00b5303476200c204c2a8578d8d260805bf621ccd3"
+    },
+    {
+      "description": "Trained-dynamics Stage-A flat results",
+      "path": "logs/trained_dynamics_stage_a_results_flat.csv",
+      "sha256": "bdbfee50a29d069a5a7eec30ed1b17e10e38641143563f5fb7ed2faf6a254de3"
+    },
+    {
+      "description": "Trained-dynamics Stage-A step predictions",
+      "path": "logs/trained_dynamics_stage_a_step_predictions.csv",
+      "sha256": "00036516460855f2debcf406f20aebcbf7b437fbb9280a1db984a2e33d27f431"
+    },
+    {
+      "description": "Trained-dynamics Stage-A calibration samples",
+      "path": "logs/trained_dynamics_stage_a_calibration_samples.csv",
+      "sha256": "006dde1f684753b41b248d5adad98c0866881f18d09d0a9ac12cc2173bb66708"
+    },
+    {
+      "description": "Risk model validation metrics",
+      "path": "logs/risk_model_validation.csv",
+      "sha256": "adb134a7484fe3c688cc0d2745e9febe5588f0d5e5c64dc783fa0fff375ad428"
+    },
+    {
+      "description": "Trained-dynamics Stage-A method summary",
+      "path": "tables/trained_dynamics_stage_a_summary_by_method.csv",
+      "sha256": "a8024cdf0edacf8d49fec6780c63ef97b5a04f8e0282f82be58274f5970ac857"
+    },
+    {
+      "description": "Trained-dynamics Stage-A domain-method summary",
+      "path": "tables/trained_dynamics_stage_a_summary_by_domain_method.csv",
+      "sha256": "d9d298ddf353a86175095ac98fcf10f0068d8ddf68b67636e1c0c5cf6360dff5"
+    },
+    {
+      "description": "Preliminary baseline tuning summary",
+      "path": "tables/baseline_tuning_summary.csv",
+      "sha256": "c42b2b14a98f4d4850426ee5b613d5abe1a203736f5fa538191eb38b1b03a9c6"
     }
   ],
   "git_commit": "not-a-git-repository",
@@ -148,7 +208,9 @@
     "Citation metadata has source notes, but final publisher-exported BibTeX should be checked before submission.",
     "The max-out 57,000-row matrix was not fully executed in this focused run.",
     "The iclr_submission artifacts are Phase-0 seeds copied from the bounded manuscript, not evidence that the max-out prompt is complete.",
-    "The trained dynamics artifacts are diagnostic and are not yet integrated into the planner results."
+    "The trained dynamics artifacts are diagnostic and are not yet integrated into the planner results.",
+    "The trained-dynamics Stage-A run covers only D0/D1 and has mixed results; it is not a Stage-B/Stage-C max-out run.",
+    "Preliminary learned risk-model validation is diagnostic only and is not yet integrated into held-out planner results."
   ],
   "paper": [
     {
@@ -239,12 +301,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "28e1847c2c3c9c1135c9c29c0cdc0c512ccf23903a890b14e30cbcb7390abe54"
+      "sha256": "5a767251fa56763df93195d3ea0cd4110bc98f93c47d0647005ed39969b82cc9"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "a00720ed8a29d1a68cb11e747ebb0a2762ecdfac9134003cf5eb14425cc976ba"
+      "sha256": "9f24b37ed2458de76b388a875eccd6bc2746fb1d9c5f313098d23a0b1db6e6da"
     },
     {
       "description": "Report: theorem A separation",
@@ -269,7 +331,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "fafb075de331fbc61e6674581d2891603716ce565dd6730e4760cd9cd8fdc334"
+      "sha256": "6a35eaabdebaeda081cc2f896ecd5369e59a92d48d0d7778cd3a20f08fc99496"
     },
     {
       "description": "Report: theory_moat_report",
@@ -380,6 +442,36 @@
       "description": "Readiness gate template",
       "path": "templates/readiness_gate_report.md",
       "sha256": "8c5c27dfffa547c7d1473aaa3f3af1278d9b8fa84ca3a56c1d0d2b92c8b85d0d"
+    },
+    {
+      "description": "Codex handoff",
+      "path": "docs/CODEX_HANDOFF.md",
+      "sha256": "8c048c69d1c36822640c965e6bdf30494f28ffbf7ddd268bb1de4371aec9fa52"
+    },
+    {
+      "description": "Report: trained-dynamics Stage-A",
+      "path": "reports/trained_dynamics_stage_a_report.md",
+      "sha256": "efc60cdcbfa62dcf97ef63fa37629a14bc44b6ba889da1886dba16c6b46b9d5e"
+    },
+    {
+      "description": "Report: trained-dynamics planner integration",
+      "path": "reports/trained_dynamics_planner_integration.md",
+      "sha256": "b328f041116a5e7f5b8700f23c4edf4ee05495ccb237894f21fb98a3b5cf6477"
+    },
+    {
+      "description": "Report: baseline fairness",
+      "path": "reports/baseline_fairness_report.md",
+      "sha256": "a912bad1d97e8ce1b031f34e6f70879c7b4fe0c394a714a83e8aa77cb9dbe742"
+    },
+    {
+      "description": "Report: CCR score design",
+      "path": "reports/ccr_score_design_report.md",
+      "sha256": "fbea55cef6afd4f77a3304fb5261a16ec1ae1de12c9bd37ace4aafe63dec2743"
+    },
+    {
+      "description": "Report: risk model validation",
+      "path": "reports/risk_model_validation_report.md",
+      "sha256": "c1faac2590e982baf99c548744bad0b620ddfd3b630ef93806d74990e46e4b89"
     }
   ],
   "theory": [

@@ -185,7 +185,12 @@ ALLOWED_LOG_FILES = {
     "dynamics_prediction_metrics.csv",
     "results.jsonl",
     "results_flat.csv",
+    "risk_model_validation.csv",
     "step_predictions.csv",
+    "trained_dynamics_stage_a_calibration_samples.csv",
+    "trained_dynamics_stage_a_results.jsonl",
+    "trained_dynamics_stage_a_results_flat.csv",
+    "trained_dynamics_stage_a_step_predictions.csv",
 }
 LATEX_SCRATCH_SUFFIXES = (
     ".aux",

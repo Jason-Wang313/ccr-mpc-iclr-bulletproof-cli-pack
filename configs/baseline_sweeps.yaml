@@ -1,0 +1,65 @@
+scope: preliminary_stage_a_and_stage_b_plan
+status: not_final_tuning
+fairness_rules:
+  candidate_budget:
+    stage_a_trained_dynamics: 24
+    focused_cpu_surrogate: 32
+    stage_b_required: [32, 128]
+  training_data: same trained dynamics ensemble for non-oracle methods in trained Stage A
+  calibration_budget:
+    stage_a_trained_dynamics_contexts_per_domain_level: 24
+    focused_cpu_surrogate_contexts_per_domain_level: 36
+  seeds:
+    stage_a_trained_dynamics: [0, 1, 2, 3, 4]
+    focused_cpu_surrogate: [0, 1, 2]
+methods:
+  vanilla_mppi:
+    tuned_parameters: {}
+    status: baseline_reference
+  robust_mpc:
+    robust_violation_penalty: [8.0, 12.0, 18.0, 24.0]
+    status: focused_suite_fixed_at_18
+  ensemble_uncertainty_penalty:
+    uncertainty_weight: [2.0, 4.0, 8.0, 12.0]
+    status: focused_suite_fixed_at_4
+  prediction_calibrated_penalty:
+    calibrated_risk_weight: [8.0, 14.0, 20.0]
+    status: focused_suite_fixed_at_14
+  cvar_ra_mppi:
+    cvar_quantile: [0.75, 0.80, 0.90]
+    violation_penalty: [8.0, 12.0, 18.0]
+    status: focused_suite_fixed_at_q80_penalty12
+  chance_constrained_mpc:
+    alpha: [0.05, 0.10, 0.15, 0.20]
+    status: focused_suite_fixed_at_alpha15
+  conformal_prediction_mpc:
+    score: negative_margin_tail
+    alpha: [0.05, 0.10, 0.15, 0.20]
+    status: included_but_not_final_sweep
+  conformal_risk_non_ccr:
+    score: violation_rate
+    alpha: [0.05, 0.10, 0.15, 0.20]
+    status: included_but_not_final_sweep
+  conformal_decision_baseline:
+    score: rank_instability
+    alpha: [0.05, 0.10, 0.15, 0.20]
+    status: included_but_not_final_sweep
+  soda_like_fallback:
+    fallback_alpha: [0.05, 0.10, 0.15, 0.20]
+    status: conservative_baseline_needs_cost_tuning
+  domain_randomized_mpc:
+    particle_spread: [low, medium, high]
+    status: surrogate_runner_only_in_focused_suite
+  sysid_mpc:
+    blend_weight_to_true: [0.50, 0.70, 0.85]
+    status: surrogate_runner_only_in_focused_suite
+  ccr_mpc:
+    alpha: [0.05, 0.10, 0.15, 0.20]
+    cvar_quantile: [0.75, 0.80, 0.90]
+    score_weights:
+      regret: [0.5, 1.0, 1.5]
+      violation: [0.5, 1.0, 1.5]
+      margin: [0.1, 0.25, 0.5]
+      rank: [0.1, 0.25, 0.5]
+      action: [0.1, 0.25, 0.5]
+    status: current_fixed_weights_need_validation_selection

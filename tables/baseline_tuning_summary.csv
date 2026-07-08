@@ -1,0 +1,20 @@
+method,current_setting,stage_a_status,next_required_tuning
+vanilla_mppi,mean predicted cost,executed in focused and trained Stage A,none beyond matched budgets
+robust_mpc,max(cost + 18*violation),executed in focused and trained Stage A,sweep violation penalty under trained dynamics
+ensemble_uncertainty_penalty,mean_cost + 4*cost_uncertainty,executed in focused and trained Stage A,sweep uncertainty weight
+prediction_calibrated_penalty,mean_cost + 14*calibrated_uncertainty_risk,executed in focused and trained Stage A,sweep calibrated-risk weight
+cvar_ra_mppi,CVaR q=0.80 with 12*violation penalty,executed in focused and trained Stage A,sweep quantile and violation penalty
+chance_constrained_mpc,violation probability <= alpha,executed in focused and trained Stage A,sweep alpha and fallback rule
+conformal_prediction_mpc,negative_margin_tail conformal gate,executed in focused and trained Stage A,sweep alpha and margin score variants
+conformal_risk_non_ccr,violation_rate conformal gate,executed in focused and trained Stage A,sweep alpha and non-CCR scores
+conformal_decision_baseline,rank_instability conformal gate,executed in focused and trained Stage A,sweep decision instability scores
+soda_like_fallback,uncertainty risk fallback,executed in focused and trained Stage A,tune fallback threshold against freezing
+domain_randomized_mpc,robust cost with surrogate domain-randomized particles,focused suite faithful; trained Stage A uses shared trained evaluator,implement trained-domain-randomized baseline
+sysid_mpc,mean_cost + 1.5*uncertainty with surrogate sysid particles,focused suite faithful; trained Stage A uses shared trained evaluator,implement trained online-adaptation baseline
+oracle_mpc,true dynamics candidate evaluator,executed in focused and trained Stage A,none
+ccr_no_calibration,mean_cost + 7*combined_CCR,executed in focused and trained Stage A,sweep CCR penalty
+calibration_no_ccr,uncertainty conformal gate,executed in focused and trained Stage A,sweep non-CCR calibrated scores
+disagreement_only,rank_instability conformal gate,executed in focused and trained Stage A,sweep disagreement definitions
+regret_only,regret_cvar conformal gate,executed in focused and trained Stage A,sweep quantile and alpha
+violation_tail_only,violation_tail conformal gate,executed in focused and trained Stage A,sweep quantile and conservatism
+ccr_mpc,combined violation/margin/CCR calibrated gate,executed in focused and trained Stage A,validation-select weights and alpha before Stage B
