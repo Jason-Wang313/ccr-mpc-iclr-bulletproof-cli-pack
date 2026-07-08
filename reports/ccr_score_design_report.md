@@ -28,6 +28,7 @@ Preliminary design and current implementation audit. The repository has hand-wei
 - Original focused surrogate suite: `tables/summary_by_method.csv`
 - Trained-dynamics Stage A: `tables/trained_dynamics_stage_a_summary_by_method.csv`
 - Trained-dynamics Stage-B pilot: `tables/trained_dynamics_stage_b_pilot_summary_by_method.csv`
+- Learned-risk planner pilot: `tables/learned_risk_stage_b_pilot_summary_by_method.csv`
 - Reliability plot: `figures/risk_reliability.png`
 - Dynamics calibration diagnostic: `figures/prediction_calibration_vs_control_risk.png`
 - Preliminary risk-model validation: `logs/risk_model_validation.csv`
@@ -52,11 +53,15 @@ This supports validation selection over a fixed hand-weighted score and warns ag
 
 In the held-out trained-dynamics Stage-B pilot, CCR-MPC improves violation over vanilla MPPI and uncalibrated CCR, but `conformal_prediction_mpc` and `conformal_risk_non_ccr` are safer at higher cost, while CVaR/RA-MPPI and robust MPC are lower cost with slightly higher violation. This reinforces the need for validation-selected learned risk models and tuned baseline sweeps before final paper claims.
 
+## Learned-Risk Planner Finding
+
+`scripts/run_learned_risk_planner_pilot.py` integrates logistic and random-forest learned risk models into MPC candidate selection using executed selected rollouts from Stage-A as the training source. In the held-out learned-risk pilot, the logistic variant slightly improves over CCR-MPC on both cost and violation, but the random-forest model selected by validation Brier performs poorly in closed loop. This means the next model-selection rule should include closed-loop validation or a parsimony/latency criterion, not Brier score alone.
+
 ## Missing For Max-Out
 
-- Planner integration for logistic/isotonic/random-forest risk models.
+- Planner integration for logistic/random-forest risk models is present in a pilot; isotonic/gradient-boosting and final selection logic remain missing.
 - Gradient-boosting risk model when available.
-- Validation-set model selection before held-out testing.
+- Closed-loop-aware validation-set model selection before held-out testing.
 - Fresh held-out Stage-B/Stage-C evaluation after selecting the risk model.
 
 ## Claim Boundary

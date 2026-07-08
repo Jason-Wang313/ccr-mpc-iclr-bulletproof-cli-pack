@@ -11,7 +11,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - Baseline before edits was up to date with `origin/main`.
 - Existing focused CPU suite remains 1026 closed-loop runs and 20862 planning-step predictions.
 - Existing verifier now passes after this continuation checkpoint: `PACK VERIFY PASSED: 0 warning(s)`.
-- Manifest now verifies 118 artifact entries.
+- Manifest now verifies 130 artifact entries after the learned-risk planner pilot.
 - New `paper/iclr_submission.tex` and `paper/iclr_submission.pdf` are seeded from the bounded manuscript, not a final max-out rewrite.
 - New trained dynamics artifacts are diagnostic in the original focused suite and integrated in the separate Stage-A runner `scripts/run_trained_dynamics_stage_a.py`.
 
@@ -50,6 +50,19 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - `tables/trained_dynamics_stage_b_pilot_summary_by_method.csv`
   - `tables/trained_dynamics_stage_b_pilot_summary_by_domain_method.csv`
   - `reports/trained_dynamics_stage_b_pilot_report.md`
+- Added learned-risk planner pilot outputs:
+  - `scripts/run_learned_risk_planner_pilot.py`
+  - `scripts/plot_learned_risk_pilot.py`
+  - `logs/learned_risk_stage_b_pilot_results.jsonl`
+  - `logs/learned_risk_stage_b_pilot_results_flat.csv`
+  - `logs/learned_risk_stage_b_pilot_step_predictions.csv`
+  - `logs/learned_risk_stage_b_pilot_calibration_samples.csv`
+  - `configs/learned_risk_stage_b_pilot_config.json`
+  - `tables/learned_risk_stage_b_pilot_summary_by_method.csv`
+  - `tables/learned_risk_stage_b_pilot_summary_by_domain_method.csv`
+  - `tables/learned_risk_stage_b_pilot_risk_model_selection.csv`
+  - `reports/learned_risk_stage_b_pilot_report.md`
+  - `figures/learned_risk_stage_b_pilot_pareto.png`
 - Added preliminary baseline/score scaffolds:
   - `configs/baseline_sweeps.yaml`
   - `tables/baseline_tuning_summary.csv`
@@ -98,6 +111,8 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - `python scripts\run_trained_dynamics_stage_a.py --domains synthetic_separation --levels L0 --methods vanilla_mppi,ccr_mpc,oracle_mpc --seeds 0 --candidates 12 --calibration-contexts 4`: smoke run passed.
 - `python scripts\run_trained_dynamics_stage_a.py --domains all --levels L0,L1,L2,L3 --seeds 0,1,2,3,4 --candidates 24 --calibration-contexts 24`: completed 2280 trained-dynamics Stage-A episodes in 2266.87 seconds.
 - `python scripts\run_trained_dynamics_stage_a.py --domains all --levels L0,L1,L2,L3 --seeds 5,6,7,8,9 --methods vanilla_mppi,robust_mpc,cvar_ra_mppi,conformal_prediction_mpc,conformal_risk_non_ccr,ccr_no_calibration,ccr_mpc,oracle_mpc --candidates 32 --calibration-contexts 32 --artifact-tag trained_dynamics_stage_b_pilot`: completed 960 trained-dynamics Stage-B pilot episodes in 858.89 seconds.
+- `python scripts\run_learned_risk_planner_pilot.py`: completed 1200 learned-risk planner pilot episodes in 1755.27 seconds.
+- `python scripts\plot_learned_risk_pilot.py`: wrote `figures/learned_risk_stage_b_pilot_pareto.png`.
 - `python scripts\validate_risk_models.py`: wrote 18 risk-model validation rows.
 - `python scripts\compare_calibration_label_sources.py`: wrote 27 calibration-label-source ablation rows.
 - `python scripts\evaluate_executed_rollout_calibration_split.py`: wrote 1596 split evaluation rows and 76 validation-selected held-out rows.
@@ -128,6 +143,13 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
   - Conformal prediction MPC: cost 30.7194, violation 0.0034
   - Conformal risk non-CCR: cost 31.9752, violation 0.0042
   - Oracle MPC: cost 28.2406, violation 0.0049
+- Learned-risk planner pilot aggregate rows:
+  - Learned logistic risk: cost 28.3399, violation 0.0084
+  - CCR-MPC: cost 28.8994, violation 0.0088
+  - CVaR/RA-MPPI: cost 28.3659, violation 0.0065
+  - Conformal prediction MPC: cost 36.9413, violation 0.0008
+  - Vanilla MPPI: cost 28.2824, violation 0.0154
+  - Validation-selected learned risk picked random forest by validation Brier, but had cost 28.3511 and violation 0.0266.
 - Preliminary risk validation:
   - Focused surrogate best Brier: random forest all features, 0.0258
   - Trained Stage-A best Brier: random forest all features, 0.0460
@@ -157,6 +179,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 - `latexmk` could not run because MiKTeX lacks Perl; direct `pdflatex`/`bibtex` worked.
 - The max-out prompt is not complete. The final max-out completion message has not been printed and must not be printed yet.
 - Trained Stage-A and Stage-B pilot results are mixed and do not support broad superiority.
+- Learned logistic risk integration is promising in one held-out pilot, but validation-Brier model selection failed in closed-loop planning.
 - Higher-dimensional domains are prototypes only; they are not integrated into the main MPC runner or trained Stage-A runner.
 - The executed-rollout calibration split supports step-level diagnostics only; accepted plan-failure rates remain too high for an episode-level guarantee.
 - Theorem D is only a sketch plus diagnostic; the severity weight is hand-coded and often too conservative.
@@ -172,7 +195,7 @@ Execute the local max-out prompt `C:\Users\wangz\Downloads\FINAL_AGENT_PROMPT_CC
 1. Commit and push this verified continuation checkpoint.
 2. Promote trained dynamics to a first-class `--model-source` option in the original runner, or keep the separate runner and integrate the higher-dimensional domain prototypes there.
 3. Run a fresh Stage-B calibration/test split after planner/domain integration; do not rely only on the Stage-A split.
-4. Execute validation-selected baseline sweeps from `configs/baseline_sweeps.yaml`.
-5. Run Stage B only after trained-domain baselines, domain difficulty, and calibration are stable.
+4. Replace Brier-only learned-risk model selection with closed-loop-aware validation or a parsimony/latency-aware rule.
+5. Execute validation-selected baseline sweeps from `configs/baseline_sweeps.yaml`.
 
 Safe to clear after handoff is updated.

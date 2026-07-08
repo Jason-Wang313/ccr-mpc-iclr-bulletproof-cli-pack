@@ -14,7 +14,7 @@
     {
       "description": "Pack verifier",
       "path": "scripts/verify_pack.py",
-      "sha256": "d5321c1f228f15e122c09f1ab4b0faba429f294dde3c60ac7df465f199f077cd"
+      "sha256": "0dd7d996b51df846ac1ed6c905ffa1463ee69ce23757b4cc209c67c19e3d2e03"
     },
     {
       "description": "PowerShell verification wrapper",
@@ -90,6 +90,16 @@
       "description": "Shift-weighted calibration diagnostic script",
       "path": "scripts/evaluate_shift_weighted_calibration.py",
       "sha256": "ec42736ad39ea932a7f223e992e78127c70210a9b523cfb4c59425627918bb7a"
+    },
+    {
+      "description": "Learned-risk planner pilot runner",
+      "path": "scripts/run_learned_risk_planner_pilot.py",
+      "sha256": "ebc93391527a9152458ba42aa8aa90cea58fcd16cfd15b24713b26457f82eba4"
+    },
+    {
+      "description": "Learned-risk pilot plotting script",
+      "path": "scripts/plot_learned_risk_pilot.py",
+      "sha256": "a58f0cf34a0e91913c373dff7de1c868aba21fc6aa15d8e86bf11c5208085916"
     }
   ],
   "completion_message": "ICLR CCR-MPC COMPLETE: bounded theory proofs, counterfactual-risk algorithms, calibration code, CPU experiment suite, baselines, ablations, plots, paper manuscript, related-work audit, and reviewer-defense reports are finished. All claims are backed by generated artifacts. Human review is required before submission.",
@@ -284,6 +294,46 @@
       "description": "Shift-weighted calibration diagnostic metrics",
       "path": "logs/shift_weighted_calibration.csv",
       "sha256": "09df5b58f0e9dd1c2a13ae896169efc1a66ce2f6cf1ffdfb20c9be84d4e922d8"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot execution config",
+      "path": "configs/learned_risk_stage_b_pilot_config.json",
+      "sha256": "e74ea4facf096fd3349c8e087ce1857e369f1cb15bd743c50eb2d344584d46db"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot result log",
+      "path": "logs/learned_risk_stage_b_pilot_results.jsonl",
+      "sha256": "c94f0835eb5753260161a109849536acc376b14562f58a665247f77123d612d0"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot flat results",
+      "path": "logs/learned_risk_stage_b_pilot_results_flat.csv",
+      "sha256": "799a49839a2db6b09eb7fb2c563a53b5b36422eeea1feb8cf1a2d8148b817d5c"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot step predictions",
+      "path": "logs/learned_risk_stage_b_pilot_step_predictions.csv",
+      "sha256": "3c461909caaca7b7528c6a49b5689b4006032863ecf96fa0b1a6e5bcf59b7757"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot calibration samples",
+      "path": "logs/learned_risk_stage_b_pilot_calibration_samples.csv",
+      "sha256": "35118621d5be51d34fe92aafd044a2707f8a88f5319896b7afcb3bd14336caae"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot method summary",
+      "path": "tables/learned_risk_stage_b_pilot_summary_by_method.csv",
+      "sha256": "e71ae7b39ec7822a72d10ee8979fb97d51225708148525f6b7454692214a7b69"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot domain-method summary",
+      "path": "tables/learned_risk_stage_b_pilot_summary_by_domain_method.csv",
+      "sha256": "91016607960d988c036b9f2690f08281b74cfbfd52d2e7be41ea1c536c13d437"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot risk model selection table",
+      "path": "tables/learned_risk_stage_b_pilot_risk_model_selection.csv",
+      "sha256": "18b536f92a619b7bf478997c3e7e9b35f7da6e0904fab71ef36a6fd313fd9c3b"
     }
   ],
   "git_commit": "not-a-git-repository",
@@ -301,7 +351,9 @@
     "The trained-dynamics Stage-B pilot covers only eight key methods, one candidate budget, one calibration-context budget, and held-out seeds 5-9; it is not the full Stage-B matrix.",
     "The Stage-B pilot again shows mixed results: CCR-MPC improves over vanilla and uncalibrated CCR, but conformal/oracle rows are safer and CVaR/robust rows can be lower cost.",
     "Theorem D is a sketch plus diagnostic only; the hand-coded severity weight is not a validated density-ratio estimator.",
-    "Shift-weighted calibration is often too conservative in the current L3 diagnostic, with most score/alpha settings rejecting all candidates."
+    "Shift-weighted calibration is often too conservative in the current L3 diagnostic, with most score/alpha settings rejecting all candidates.",
+    "The learned-risk planner pilot shows logistic learned risk slightly improves over CCR-MPC, but validation-Brier selection picked a random forest that performed poorly in closed loop.",
+    "Learned risk models are trained from prior selected rollouts and then applied to all sampled candidates; this selected-action to all-candidate shift remains a limitation."
   ],
   "paper": [
     {
@@ -396,6 +448,11 @@
       "description": "Domain schematic: pushing contact 4D",
       "path": "figures/domain_schematic_pushing_contact_4d.png",
       "sha256": "53851125d75c4c0ebc3fa6e6bc7aba2c6aa0d604f6491acfc06c66e2556fc8aa"
+    },
+    {
+      "description": "Learned-risk Stage-B pilot Pareto plot",
+      "path": "figures/learned_risk_stage_b_pilot_pareto.png",
+      "sha256": "fe80bf6c63e1e4eaddd4dfd1688b64faf20fcd2ec56b6773b315080005d87029"
     }
   ],
   "reports": [
@@ -412,12 +469,12 @@
     {
       "description": "Report: preupgrade repository audit",
       "path": "reports/preupgrade_repo_audit.md",
-      "sha256": "beb48a25196b8d8b36230802fe83b432b145f0bddf3b0cabc0e66f0c73bf5386"
+      "sha256": "cda571e3149a31e74a1b725c492970f9367c992c05dcb8f5a95f2f5c4770fd6d"
     },
     {
       "description": "Report: final submission readiness gate",
       "path": "reports/final_submission_readiness.md",
-      "sha256": "63f1377db2b43e09d96bf4328c0ca908e7e91d4c58b37e2eff1ac905ed233bf2"
+      "sha256": "7e122ca73bd98e3956f5a1349c178acf94d5410a084e00ac71e1154025df7182"
     },
     {
       "description": "Report: theorem A separation",
@@ -442,7 +499,7 @@
     {
       "description": "Report: acceptance-critical result gate",
       "path": "reports/acceptance_critical_result_gate.md",
-      "sha256": "9fe5e644fa4afb52d4c920fcd564ae8900b5cdc34e145bd23066101dd524d842"
+      "sha256": "63b6d631778ba6469ec95f5e698cc6fa9a8028262580a983c83cddcfaede317b"
     },
     {
       "description": "Report: theory_moat_report",
@@ -557,7 +614,7 @@
     {
       "description": "Codex handoff",
       "path": "docs/CODEX_HANDOFF.md",
-      "sha256": "7bf1ccfece045f3f71cf6689d41645bbcad2d5643897a786d20be7b598900904"
+      "sha256": "2d3087db8a7ed05033c6ac708918ccb093d5c4db3f5158777ac46b8d12888cf4"
     },
     {
       "description": "Report: trained-dynamics Stage-A",
@@ -572,12 +629,12 @@
     {
       "description": "Report: baseline fairness",
       "path": "reports/baseline_fairness_report.md",
-      "sha256": "4523e27f85bd6947862f7883c2e911eb08cb97b11bb02d32981bd14354631c65"
+      "sha256": "4eb3fda33a57c6934fe17ee36182afcfa86d136a4641664a7328a69d601f1e81"
     },
     {
       "description": "Report: CCR score design",
       "path": "reports/ccr_score_design_report.md",
-      "sha256": "8613a428e07711b7fdaee751c615edb8238558329cc591cb297f7432f922b790"
+      "sha256": "e82b864ad2510d05ee387b57b6ed130fab31e421923e1632c96297602c34b885"
     },
     {
       "description": "Report: risk model validation",
@@ -613,6 +670,11 @@
       "description": "Report: theorem D shift-calibration sketch",
       "path": "reports/theorem_D_shift_calibration.md",
       "sha256": "ebae4b4a70691bb2422523cd8c0713c6e9a75d64e30b586b026c000f76f1a107"
+    },
+    {
+      "description": "Report: learned-risk planner pilot",
+      "path": "reports/learned_risk_stage_b_pilot_report.md",
+      "sha256": "e2211fd9d496c522968baefdf6243471734f5b3f063f9728143b78ab3a2da5fa"
     }
   ],
   "theory": [

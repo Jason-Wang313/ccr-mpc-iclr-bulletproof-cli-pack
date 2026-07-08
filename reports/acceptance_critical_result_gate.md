@@ -11,6 +11,7 @@ Current gate result: do not claim broad empirical superiority.
 - `reports/experiment_results_summary.md`
 - `reports/trained_dynamics_stage_a_report.md`
 - `reports/trained_dynamics_stage_b_pilot_report.md`
+- `reports/learned_risk_stage_b_pilot_report.md`
 - `paper/iclr_submission.tex`
 - `reports/preupgrade_repo_audit.md`
 
@@ -23,6 +24,7 @@ Current gate result: do not claim broad empirical superiority.
 - In trained-dynamics Stage A, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0165741 versus 0.0259049.
 - In the trained-dynamics Stage-B pilot, CCR-MPC improves aggregate violation over vanilla MPPI: 0.0113636 versus 0.0198611.
 - In the trained-dynamics Stage-B pilot, CCR-MPC improves aggregate violation over uncalibrated CCR: 0.0113636 versus 0.0154419.
+- In the learned-risk planner pilot, `learned_risk_executed_logistic` slightly improves over CCR-MPC in both violation and cost: violation 0.0083670 versus 0.0087837, cost 28.3399 versus 28.8994.
 - The executed-rollout calibration split keeps validation-selected held-out accepted step-violation rates below 0.05 on average for all tested alpha values.
 
 ## Where CCR-MPC Ties
@@ -40,6 +42,8 @@ Current gate result: do not claim broad empirical superiority.
 - In trained-dynamics Stage A, the `domain_randomized_mpc` row is lower cost but slightly higher violation than CCR-MPC; it is not yet a fully faithful domain-randomized learned-model baseline.
 - In the trained-dynamics Stage-B pilot, `conformal_prediction_mpc`, `conformal_risk_non_ccr`, and `oracle_mpc` have lower aggregate violation than CCR-MPC.
 - In the trained-dynamics Stage-B pilot, `cvar_ra_mppi` and `robust_mpc` have lower mean cost than CCR-MPC with only slightly higher violation.
+- In the learned-risk planner pilot, conformal prediction, conformal risk, oracle, and CVaR remain safer than the learned logistic risk planner.
+- The validation-selected learned risk model is random forest by Brier score, but its closed-loop violation is worse than vanilla MPPI in this pilot: 0.0266498 versus 0.0154293.
 - The executed-rollout calibration split still has high accepted plan-failure rates, averaging roughly 0.22-0.24 across alpha settings.
 
 ## Allowed Paper Claim
@@ -48,7 +52,7 @@ The current paper should claim bounded diagnostic insight about decision-risk ca
 
 ## Disallowed Paper Claim
 
-The current evidence does not support a strong-superiority claim over CVaR/RA-MPPI, conformal-prediction MPC, or all conformal/risk-aware baselines.
+The current evidence does not support a strong-superiority claim over CVaR/RA-MPPI, conformal-prediction MPC, or all conformal/risk-aware baselines. It also does not support claiming that learned risk-model selection is solved.
 
 ## Max-Out Requirement Before Stronger Claim
 
